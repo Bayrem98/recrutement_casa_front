@@ -1,5 +1,11 @@
-body {
+.home-page {
     background-image: url('/public/images/background-image.jpg');
     background-size: cover;
     height: 100vh;
+}
+
+.fr-page {
+    background-image: url('/public/images/background-2.jpg');
+    background-size: cover;
+    
 }

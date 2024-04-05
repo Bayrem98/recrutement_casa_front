@@ -9,7 +9,7 @@ function Navbard() {
           RECRUTEMENT
           <span style={{ fontSize: 25, fontWeight: "bold" }}> CASANOVA</span>
         </NavbarBrand>
-        <Nav className="me-auto" style={{ marginLeft: 600 }}>
+        <Nav className="me-auto" style={{ marginLeft: 570 }}>
           <NavItem>
             <NavLink href="" style={{ color: "white" }}>
               CANDIDATURE

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   Card,
@@ -11,6 +12,28 @@ import {
 } from "reactstrap";
 
 const FrancaisPage = () => {
+  const [inputFields, setInputFields] = useState({
+    email: "",
+    password: "",
+    age: null,
+  });
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+
+  const validateValues = (inputValues: any) => {
+    let errors = {};
+    if (inputValues.email.length < 15) {
+      errors = "Email is too short";
+    }
+    if (inputValues.password.length < 5) {
+      errors = "Password is too short";
+    }
+    if (!inputValues.age || inputValues.age < 18) {
+      errors = "Minimum age is 18";
+    }
+    return errors;
+  };
+
   return (
     <>
       <div className="fr-page">
@@ -178,7 +201,9 @@ const FrancaisPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Button style={{ float: "right", marginTop: 20 }}>SUIVANT</Button>
+                <Button style={{ float: "right", marginTop: 20 }}>
+                  SUIVANT
+                </Button>
               </Form>
             </CardBody>
           </Card>

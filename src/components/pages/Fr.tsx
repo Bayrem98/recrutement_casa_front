@@ -73,6 +73,7 @@ const FrancaisPage = () => {
     if (Object.keys(errors).length === 0 && submitting) {
       finishSubmit();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errors]);
 
   return (

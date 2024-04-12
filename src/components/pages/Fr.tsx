@@ -7,22 +7,29 @@ import {
   Form,
   FormGroup,
   Input,
-  Label,
   Row,
 } from "reactstrap";
+
+const fields = [
+  { key: "clib", name: "Célibataire" },
+  { key: "mari", name: "Marié(e)" },
+  { key: "divo", name: "Divorcé(e)" },
+  { key: "veu", name: "Veuf(ve)" },
+];
 
 const FrancaisPage = () => {
   const [inputFields, setInputFields] = useState({
     nom: "",
     prenom: "",
-    num_cin: 0,
+    num_cin: "",
     date_birth: "",
-    num_tel1: 0,
-    num_tel2: 0,
+    num_tel1: "",
+    num_tel2: "",
     adresse: "",
     city: "",
     code_p: "",
     email: "",
+    situation: "",
   });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -73,7 +80,7 @@ const FrancaisPage = () => {
     if (Object.keys(errors).length === 0 && submitting) {
       finishSubmit();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errors]);
 
   return (
@@ -97,8 +104,11 @@ const FrancaisPage = () => {
             Vous voulez postuler pour un poste de télécoseiller en langue
           </p>
         </div>
-        <div className="" style={{ marginLeft: 50, marginRight: 50 }}>
-          <Card style={{ border: 0 }}>
+        <div
+          className=""
+          style={{ marginLeft: 50, marginRight: 50, paddingBottom: 50 }}
+        >
+          <Card style={{ border: 0, paddingBottom: 20 }}>
             <p
               style={{
                 textAlign: "center",
@@ -114,10 +124,10 @@ const FrancaisPage = () => {
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="nom">Nom</Label>
                       <Input
                         name="nom"
                         type="text"
+                        placeholder="Name"
                         value={inputFields.nom}
                         onChange={handleChange}
                       />
@@ -125,10 +135,10 @@ const FrancaisPage = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="prenom">Prénom</Label>
                       <Input
                         name="prenom"
                         type="text"
+                        placeholder="Prénom"
                         value={inputFields.prenom}
                         onChange={handleChange}
                       />
@@ -138,10 +148,10 @@ const FrancaisPage = () => {
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="exampleEmail">Numéro CIN</Label>
                       <Input
                         name="num_cin"
                         type="number"
+                        placeholder="Numéro CIN"
                         value={inputFields.num_cin}
                         onChange={handleChange}
                       />
@@ -149,7 +159,6 @@ const FrancaisPage = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="date_birth">Date de Naissance</Label>
                       <Input
                         name="date_birth"
                         type="date"
@@ -162,10 +171,10 @@ const FrancaisPage = () => {
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="num_tel1">Numéro Portable-1</Label>
                       <Input
                         name="num_tel1"
                         type="text"
+                        placeholder="Numéro Téléphone-1"
                         value={inputFields.num_tel1}
                         onChange={handleChange}
                       />
@@ -173,10 +182,10 @@ const FrancaisPage = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="num_tel2">Numéro Portable-2</Label>
                       <Input
                         name="num_tel2"
                         type="text"
+                        placeholder="Numéro Téléphone-2"
                         value={inputFields.num_tel2}
                         onChange={handleChange}
                       />
@@ -186,10 +195,10 @@ const FrancaisPage = () => {
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="adresse">Adresse</Label>
                       <Input
                         name="adresse"
                         type="text"
+                        placeholder="Adresse"
                         value={inputFields.adresse}
                         onChange={handleChange}
                       />
@@ -197,10 +206,10 @@ const FrancaisPage = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="city">Ville</Label>
                       <Input
                         name="city"
                         type="text"
+                        placeholder="Ville"
                         value={inputFields.city}
                         onChange={handleChange}
                       />
@@ -210,10 +219,10 @@ const FrancaisPage = () => {
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="code_p">Code postale</Label>
                       <Input
                         name="code_p"
                         type="text"
+                        placeholder="Code Postale"
                         value={inputFields.code_p}
                         onChange={handleChange}
                       />
@@ -221,10 +230,10 @@ const FrancaisPage = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="exampleEmail">Email</Label>
                       <Input
                         type="email"
                         name="email"
+                        placeholder="Email"
                         value={inputFields.email}
                         onChange={handleChange}
                       />
@@ -234,12 +243,17 @@ const FrancaisPage = () => {
                 <Row>
                   <Col>
                     <FormGroup>
-                      <Label for="examplePassword">Situation Familiale</Label>
                       <Input
-                        id="examplePassword"
-                        name="password"
+                        name="situation"
                         type="select"
-                      />
+                        placeholder="Situation Familiale"
+                      >
+                        {fields.map((f) => (
+                          <option key={f.key} value={f.key}>
+                            {f.name}
+                          </option>
+                        ))}
+                      </Input>
                     </FormGroup>
                   </Col>
                 </Row>

@@ -8,7 +8,7 @@ import {
   faUserGraduate,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Checkbox, Steps, message } from "antd";
+import { Checkbox, Steps } from "antd";
 import { useState } from "react";
 import {
   Button,
@@ -23,33 +23,40 @@ import {
   Row,
 } from "reactstrap";
 import Navbard from "../parts/Navbard";
+import { addUser } from "../../actions/Users/action";
 
 const fields = [
-  { key: "clib", name: "Célibataire" },
-  { key: "mari", name: "Marié(e)" },
-  { key: "divo", name: "Divorcé(e)" },
-  { key: "veu", name: "Veuf(ve)" },
+  { key: "Célibataire", name: "Célibataire" },
+  { key: "Marié(e)", name: "Marié(e)" },
+  { key: "Divorcé(e)", name: "Divorcé(e)" },
+  { key: "Veuf(ve)", name: "Veuf(ve)" },
 ];
 
 const fields2 = [
-  { key: "pri", name: "Primaire" },
-  { key: "seco", name: "Secondaire" },
-  { key: "nivb", name: "Niveau Bac" },
-  { key: "bach", name: "Bachelier" },
-  { key: "ba+", name: "Bac+2" },
-  { key: "lic", name: "Licence" },
-  { key: "maî", name: "Maîtrise" },
-  { key: "mas", name: "Master" },
+  { key: "Primaire", name: "Primaire" },
+  { key: "Secondaire", name: "Secondaire" },
+  { key: "Niveau Bac", name: "Niveau Bac" },
+  { key: "Bachelier", name: "Bachelier" },
+  { key: "Bac+2", name: "Bac+2" },
+  { key: "Licence", name: "Licence" },
+  { key: "Maîtrise", name: "Maîtrise" },
+  { key: "Master", name: "Master" },
 ];
 
 const fields3 = [
-  { key: "pas", name: "Pas d'experiences" },
-  { key: "centr", name: "J'ai déja travaillé dans un centre d'appel" },
+  { key: "Pas d'experiences", name: "Pas d'experiences" },
   {
-    key: "voyan",
+    key: "J'ai déja travaillé dans un centre d'appel",
+    name: "J'ai déja travaillé dans un centre d'appel",
+  },
+  {
+    key: "J'ai déja fait une expérience similaire dans la voyance",
     name: "J'ai déja fait une expérience similaire dans la voyance",
   },
-  { key: "autr", name: "J'ai travaillé dans un autre domaine" },
+  {
+    key: "J'ai travaillé dans un autre domaine",
+    name: "J'ai travaillé dans un autre domaine",
+  },
 ];
 
 const steps = [
@@ -108,32 +115,97 @@ const FrancaisPage = () => {
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-  const [inputFields, setInputFields] = useState({
-    nom: "",
-    prenom: "",
-    num_cin: "",
-    date_birth: "",
-    num_tel1: "",
-    num_tel2: "",
-    adresse: "",
-    city: "",
-    code_p: "",
-    email: "",
-    situation: "",
-    niveau: "",
-    specia: "",
-    experi: "",
-    question1: "",
-    question2: "",
-    question3: "",
-    cover_cv: "",
-  });
+  const [nom, setNom] = useState<string>("");
+  const [prenom, setPrenom] = useState<string>("");
+  const [num_cin, setNum_cin] = useState<string>("");
+  const [date_naiss, setDateNaiss] = useState<string>("");
+  const [num_tel1, setNum_tel1] = useState<string>("");
+  const [num_tel2, setNum_tel2] = useState<string>("");
+  const [adresse, setAdresse] = useState<string>("");
+  const [ville, setVille] = useState<string>("");
+  const [code_p, setCode_p] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [situation, setSituation] = useState<string>(fields[0].key);
+  const [niveau, setNiveau] = useState<string>(fields2[0].key);
+  const [specia, setSpecia] = useState<string>("");
+  const [experi, setExperi] = useState<string>(fields3[0].key);
+  const [question1, setQuestion1] = useState<string>("");
+  const [question2, setQuestion2] = useState<string>("");
+  const [question3, setQuestion3] = useState<string>("");
+  const [cover_cv, setCover_cv] = useState<any>();
 
-  const handleChange = (e: any) => {
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
+  const changeCoverHandler = (event: any) => {
+    const selectedCover = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", selectedCover);
+    fetch(`http://localhost:3001/cover`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+        setCover_cv(`${result.filename}`);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setCover_cv(undefined);
+      });
   };
 
-  const FirstContent = () => (
+  const handleQuestion1Change = (value: string) => {
+    setQuestion1(value);
+  };
+
+  const submit = () => {
+    const newUser = {
+      nom,
+      prenom,
+      num_cin,
+      date_naiss,
+      num_tel1,
+      num_tel2,
+      adresse,
+      ville,
+      code_p,
+      email,
+      situation,
+      niveau,
+      specia,
+      experi,
+      question1,
+      question2,
+      question3,
+      cover_cv,
+    };
+    addUser(newUser, () => {
+      window.location.reload();
+      reset();
+    });
+  };
+
+  const reset = () => {
+    setNom("");
+    setPrenom("");
+    setNum_cin("");
+    setDateNaiss("");
+    setNum_tel1("");
+    setNum_tel2("");
+    setAdresse("");
+    setVille("");
+    setCode_p("");
+    setEmail("");
+    setSituation(fields[0].key);
+    setNiveau(fields2[0].key);
+    setSpecia("");
+    setExperi(fields3[0].key);
+    setQuestion1("");
+    setQuestion2("");
+    setQuestion3("");
+    setCover_cv("");
+  };
+
+  const FirstContent = (
     <>
       <CardBody>
         <Form>
@@ -141,11 +213,12 @@ const FrancaisPage = () => {
             <Col md={6}>
               <FormGroup>
                 <Input
+                  id="nom"
                   name="nom"
                   type="text"
-                  placeholder="Name"
-                  value={inputFields.nom}
-                  onChange={handleChange}
+                  placeholder="Nom"
+                  value={nom}
+                  onChange={(e) => setNom(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -155,8 +228,8 @@ const FrancaisPage = () => {
                   name="prenom"
                   type="text"
                   placeholder="Prénom"
-                  value={inputFields.prenom}
-                  onChange={handleChange}
+                  value={prenom}
+                  onChange={(e) => setPrenom(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -166,10 +239,10 @@ const FrancaisPage = () => {
               <FormGroup>
                 <Input
                   name="num_cin"
-                  type="number"
+                  type="text"
                   placeholder="Numéro CIN"
-                  value={inputFields.num_cin}
-                  onChange={handleChange}
+                  value={num_cin}
+                  onChange={(e) => setNum_cin(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -178,8 +251,8 @@ const FrancaisPage = () => {
                 <Input
                   name="date_birth"
                   type="date"
-                  value={inputFields.date_birth}
-                  onChange={handleChange}
+                  value={date_naiss}
+                  onChange={(e) => setDateNaiss(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -191,8 +264,8 @@ const FrancaisPage = () => {
                   name="num_tel1"
                   type="text"
                   placeholder="Numéro Téléphone-1"
-                  value={inputFields.num_tel1}
-                  onChange={handleChange}
+                  value={num_tel1}
+                  onChange={(e) => setNum_tel1(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -202,8 +275,8 @@ const FrancaisPage = () => {
                   name="num_tel2"
                   type="text"
                   placeholder="Numéro Téléphone-2"
-                  value={inputFields.num_tel2}
-                  onChange={handleChange}
+                  value={num_tel2}
+                  onChange={(e) => setNum_tel2(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -215,8 +288,8 @@ const FrancaisPage = () => {
                   name="adresse"
                   type="text"
                   placeholder="Adresse"
-                  value={inputFields.adresse}
-                  onChange={handleChange}
+                  value={adresse}
+                  onChange={(e) => setAdresse(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -226,8 +299,8 @@ const FrancaisPage = () => {
                   name="city"
                   type="text"
                   placeholder="Ville"
-                  value={inputFields.city}
-                  onChange={handleChange}
+                  value={ville}
+                  onChange={(e) => setVille(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -239,8 +312,8 @@ const FrancaisPage = () => {
                   name="code_p"
                   type="text"
                   placeholder="Code Postale"
-                  value={inputFields.code_p}
-                  onChange={handleChange}
+                  value={code_p}
+                  onChange={(e) => setCode_p(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -250,8 +323,8 @@ const FrancaisPage = () => {
                   type="email"
                   name="email"
                   placeholder="Email"
-                  value={inputFields.email}
-                  onChange={handleChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -261,9 +334,11 @@ const FrancaisPage = () => {
               <FormGroup>
                 <Label for="situation">*Situation Familiale :</Label>
                 <Input
+                  value={situation}
+                  id="situation"
                   name="situation"
                   type="select"
-                  placeholder="Situation Familiale"
+                  onChange={(e) => setSituation(e.target.value)}
                 >
                   {fields.map((f) => (
                     <option key={f.key} value={f.key}>
@@ -279,7 +354,7 @@ const FrancaisPage = () => {
     </>
   );
 
-  const SecondContent = () => (
+  const SecondContent = (
     <>
       <CardBody>
         <Form>
@@ -290,8 +365,8 @@ const FrancaisPage = () => {
                 <Input
                   name="niveau"
                   type="select"
-                  value={inputFields.niveau}
-                  onChange={handleChange}
+                  value={niveau}
+                  onChange={(e) => setNiveau(e.target.value)}
                 >
                   {" "}
                   {fields2.map((f) => (
@@ -308,8 +383,8 @@ const FrancaisPage = () => {
                   name="specia"
                   type="text"
                   placeholder="Spécialite..."
-                  value={inputFields.specia}
-                  onChange={handleChange}
+                  value={specia}
+                  onChange={(e) => setSpecia(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -322,8 +397,8 @@ const FrancaisPage = () => {
                   name="experi"
                   type="select"
                   placeholder="Expérience"
-                  value={inputFields.experi}
-                  onChange={handleChange}
+                  value={experi}
+                  onChange={(e) => setExperi(e.target.value)}
                 >
                   {" "}
                   {fields3.map((f) => (
@@ -340,7 +415,7 @@ const FrancaisPage = () => {
     </>
   );
 
-  const ThirdContent = () => (
+  const ThirdContent = (
     <>
       <CardBody>
         <Form>
@@ -351,9 +426,19 @@ const FrancaisPage = () => {
                   1-Avez-vous déjà entendu parler de nous ?
                 </Label>
                 <div style={{ marginLeft: 30 }}>
-                  <Checkbox>Oui</Checkbox>
+                  <Checkbox
+                    value={question1}
+                    onChange={() => handleQuestion1Change}
+                  >
+                    Oui
+                  </Checkbox>
                   <br />
-                  <Checkbox>Non</Checkbox>
+                  <Checkbox
+                    value={question1}
+                    onChange={() => handleQuestion1Change}
+                  >
+                    Non
+                  </Checkbox>
                 </div>
               </FormGroup>
             </Col>
@@ -366,8 +451,8 @@ const FrancaisPage = () => {
                   name="question2"
                   type="textarea"
                   placeholder="Votre réponse en deux lignes..."
-                  value={inputFields.question2}
-                  onChange={handleChange}
+                  value={question2}
+                  onChange={(e) => setQuestion2(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -383,8 +468,8 @@ const FrancaisPage = () => {
                   name="question3"
                   type="textarea"
                   placeholder="Votre réponse..."
-                  value={inputFields.question3}
-                  onChange={handleChange}
+                  value={question3}
+                  onChange={(e) => setQuestion3(e.target.value)}
                 />
               </FormGroup>
             </Col>
@@ -394,7 +479,7 @@ const FrancaisPage = () => {
     </>
   );
 
-  const LastContent = () => (
+  const LastContent = (
     <>
       <CardBody>
         <Form>
@@ -409,8 +494,7 @@ const FrancaisPage = () => {
                 <Input
                   name="cover"
                   type="file"
-                  value={inputFields.cover_cv}
-                  onChange={handleChange}
+                  onChange={changeCoverHandler}
                 ></Input>
               </FormGroup>
             </Col>
@@ -423,13 +507,13 @@ const FrancaisPage = () => {
   const renderContent = () => {
     switch (current) {
       case 0:
-        return <FirstContent />;
+        return <>{FirstContent}</>;
       case 1:
-        return <SecondContent />;
+        return <>{SecondContent}</>;
       case 2:
-        return <ThirdContent />;
+        return <>{ThirdContent}</>;
       case 3:
-        return <LastContent />;
+        return <>{LastContent}</>;
       default:
         return null;
     }
@@ -487,12 +571,7 @@ const FrancaisPage = () => {
                     </Button>
                   )}
                   {current === steps.length - 1 && (
-                    <Button
-                      color="success"
-                      onClick={() =>
-                        message.success("Vous avez terminer votre inscription")
-                      }
-                    >
+                    <Button color="success" onClick={submit}>
                       Valider
                     </Button>
                   )}

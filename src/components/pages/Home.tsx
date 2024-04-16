@@ -1,17 +1,30 @@
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Button, NavbarBrand } from "reactstrap";
 
 const Home = () => {
   return (
     <>
       <div className="home-page">
-        <div className="" style={{ textAlign: "center", marginTop: -70 }}>
-          <h1 style={{ color: "white", fontSize: 50, paddingTop: 135 }}>CASANOVA</h1>
+        <NavbarBrand href="/" style={{ color: "white", marginLeft: 20 }}>
+          RECRUTEMENT
+          <span style={{ fontSize: 25, fontWeight: "bold" }}> CASANOVA</span>
+        </NavbarBrand>
+        <div>
+          <h1
+            style={{
+              color: "white",
+              fontSize: 50,
+              paddingTop: 80,
+              paddingLeft: 740,
+            }}
+          >
+            CASANOVA
+          </h1>
           <p
             style={{
               color: "white",
               width: 600,
-              marginLeft: 480,
+              marginLeft: 580,
               fontSize: 26,
               textAlign: "center",
             }}
@@ -21,7 +34,7 @@ const Home = () => {
             Vous voulez postuler pour un poste de télécoseiller en langue
           </p>
         </div>
-        <div className="" style={{ marginTop: 250, marginLeft: 50 }}>
+        <div className="" style={{ marginTop: 300, marginLeft: 50 }}>
           <Link to={"/fr"}>
             <Button
               outline

@@ -22,6 +22,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
+import Navbard from "../parts/Navbard";
 
 const fields = [
   { key: "clib", name: "Célibataire" },
@@ -437,6 +438,7 @@ const FrancaisPage = () => {
   return (
     <>
       <div className="fr-page">
+        <Navbard />
         <div className="" style={{ textAlign: "center", marginTop: -70 }}>
           <h1 style={{ color: "white", fontSize: 52, paddingTop: 130 }}>
             CASANOVA

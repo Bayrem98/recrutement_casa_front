@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import { faAddressCard } from "@fortawesome/free-regular-svg-icons";
 import {
   faInbox,
@@ -523,16 +524,22 @@ const FrancaisPage = () => {
     <>
       <div className="fr-page">
         <Navbard />
-        <div className="" style={{ textAlign: "center", marginTop: -70 }}>
-          <h1 style={{ color: "white", fontSize: 52, paddingTop: 130 }}>
-           ASTRAGALE
+        <div style={{ paddingTop: 272, paddingBottom: 272 }}>
+          <h1
+            style={{
+              color: "white",
+              fontSize: 52,
+              marginLeft: "40%",
+            }}
+          >
+            ASTRAGALE
           </h1>
           <p
             style={{
               color: "white",
               width: 600,
-              marginLeft: 350,
-              fontSize: 28,
+              marginLeft: "27%",
+              fontSize: 30,
               textAlign: "center",
             }}
           >
@@ -541,22 +548,20 @@ const FrancaisPage = () => {
             Vous voulez postuler pour un poste de télécoseiller en langue
           </p>
         </div>
-        <div
-          className=""
-          style={{ marginLeft: 50, marginRight: 50, paddingBottom: 50 }}
-        >
-          <div>
-            <Card style={{ border: 0, paddingBottom: 20 }}>
+        <div style={{ marginLeft: 50, marginRight: 50 }}>
+          <div id="formulaire">
+            <Card style={{ border: 0, marginBottom: 190 }}>
               <p
                 style={{
                   textAlign: "center",
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: "bold",
-                  paddingTop: 10,
+                  paddingTop: 65,
                 }}
               >
                 DÉPOSER VOTRE CANDIDATURE
               </p>
+              <br />
               <Steps
                 current={current}
                 items={items}
@@ -590,27 +595,26 @@ const FrancaisPage = () => {
             </Card>
           </div>
         </div>
-        <div
-          className=""
-          style={{ marginLeft: 200, marginRight: 200, paddingBottom: 100 }}
-        >
-          <Card style={{ borderRadius: 180 }}>
+        <div id="annonces" style={{ marginLeft: 200, marginRight: 200 }}>
+          <Card style={{ borderRadius: 180, marginBottom: 420 }}>
             <h2
               style={{
                 textAlign: "center",
-                paddingTop: 10,
+                paddingTop: 80,
                 color: "rgb(25, 118, 210)",
               }}
             >
               CONSEILLERS EN RELATIONS HUMAINES{" "}
             </h2>
+            <br />
             <span
               style={{ textAlign: "center", fontSize: 22, fontWeight: "bold" }}
             >
               PROFIL :
             </span>
             <br />
-            <div style={{ textAlign: "center" }}>
+            <br />
+            <div style={{ textAlign: "center", paddingBottom: 40 }}>
               <p style={{ fontSize: 18 }}>
                 *Maitrise parfaite de langue française à l’oral (bonne
                 élocution) comme à l’écrit.
@@ -626,11 +630,8 @@ const FrancaisPage = () => {
             </div>
           </Card>
         </div>
-        <div
-          className=""
-          style={{ marginLeft: 100, marginRight: 100, paddingBottom: 100 }}
-        >
-          <Card>
+        <div style={{ marginLeft: 100, marginRight: 100, paddingBottom: 30 }}>
+          <Card id="contact" style={{ marginTop: 100 }}>
             <h2
               style={{
                 textAlign: "center",
@@ -683,6 +684,30 @@ const FrancaisPage = () => {
             </div>
           </Card>
         </div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d284.2092886192863!2d10.629663082749477!3d35.83441499867604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x130275dc196c8893%3A0x307441513a219032!2sUlysse%20Call%20Center!5e0!3m2!1sfr!2stn!4v1713357874110!5m2!1sfr!2stn"
+          style={{
+            border: 0,
+            height: 300,
+            width: "95%",
+            marginLeft: 30,
+            marginBottom: 50,
+            borderRadius: 20,
+          }}
+          loading="lazy"
+        ></iframe>
+        <footer
+          style={{
+            position: "fixed",
+            bottom: 0,
+            color: "white",
+            left: "32%",
+            fontSize: 20,
+            fontWeight: "lighter",
+          }}
+        >
+          <p>Copyright © recrutement.astragale-tunisie.com 2024</p>
+        </footer>
       </div>
     </>
   );

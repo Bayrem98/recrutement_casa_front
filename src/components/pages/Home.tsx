@@ -5,8 +5,8 @@ const Home = () => {
   return (
     <>
       <div className="home-page">
-        <NavbarBrand href="/" style={{ color: "white", marginLeft: 20 }}>
-          RECRUTEMENT
+        <NavbarBrand href="/" style={{ color: "white", marginLeft: 20, }}>
+          RECRUTEMENT{" "}
           <span style={{ fontSize: 25, fontWeight: "bold" }}>
             ASTRAGALE & ULYSSE
           </span>
@@ -36,10 +36,10 @@ const Home = () => {
             Vous voulez postuler pour un poste de télécoseiller en langue
           </p>
         </div>
-        <div className="" style={{ marginTop: 200, marginLeft: 50 }}>
+        <div className="" style={{ marginTop: 250, marginLeft: 50 }}>
           <Link to={"/fr"}>
             <Button
-              color="success"
+              color="warning"
               outline
               style={{
                 width: 180,
@@ -51,7 +51,7 @@ const Home = () => {
             </Button>
           </Link>
           <Link to={"/en"}>
-            <Button color="success" outline style={{ width: 180, height: 80 }}>
+            <Button color="info" outline style={{ width: 180, height: 80 }}>
               ANGLAISE
             </Button>
           </Link>

@@ -529,7 +529,7 @@ const AnglaisPage = () => {
       <div className="fr-page">
         <Navbard2 />
         <div className="" style={{ textAlign: "center", marginTop: -70 }}>
-          <h1 style={{ color: "white", fontSize: 52, paddingTop: 130 }}>
+          <h1 style={{ color: "white", fontSize: 52, paddingTop: 180 }}>
             ULYSSE
           </h1>
           <p
@@ -691,10 +691,10 @@ const AnglaisPage = () => {
         </div>
         <footer
           style={{
-            position: "absolute",
-            bottom: -931,
+            position: "fixed",
+            bottom: 0,
             color: "white",
-            left: "33%",
+            left: "30%",
             fontSize: 20,
             fontWeight: "lighter",
           }}

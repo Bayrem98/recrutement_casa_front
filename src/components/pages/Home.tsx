@@ -7,7 +7,9 @@ const Home = () => {
       <div className="home-page">
         <NavbarBrand href="/" style={{ color: "white", marginLeft: 20 }}>
           RECRUTEMENT
-          <span style={{ fontSize: 25, fontWeight: "bold" }}> CASANOVA</span>
+          <span style={{ fontSize: 25, fontWeight: "bold" }}>
+            ASTRAGALE & ULYSSE
+          </span>
         </NavbarBrand>
         <div>
           <h1
@@ -18,7 +20,7 @@ const Home = () => {
               paddingLeft: 740,
             }}
           >
-            CASANOVA
+            NOUS SOMME
           </h1>
           <p
             style={{
@@ -34,25 +36,38 @@ const Home = () => {
             Vous voulez postuler pour un poste de télécoseiller en langue
           </p>
         </div>
-        <div className="" style={{ marginTop: 300, marginLeft: 50 }}>
+        <div className="" style={{ marginTop: 200, marginLeft: 50 }}>
           <Link to={"/fr"}>
             <Button
-              outline
               color="success"
+              outline
               style={{
-                width: 200,
+                width: 180,
                 marginRight: 50,
+                height: 80,
               }}
             >
               FRANÇAISE
             </Button>
           </Link>
           <Link to={"/en"}>
-            <Button outline color="success" style={{ width: 200 }}>
+            <Button color="success" outline style={{ width: 180, height: 80 }}>
               ANGLAISE
             </Button>
           </Link>
         </div>
+        <footer
+          style={{
+            position: "fixed",
+            bottom: 0,
+            color: "white",
+            left: 10,
+            fontSize: 20,
+            fontWeight: "lighter",
+          }}
+        >
+          <p>Copyright © recrutement.astragale-tunisie.com 2024</p>
+        </footer>
       </div>
     </>
   );

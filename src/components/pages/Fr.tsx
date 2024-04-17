@@ -525,7 +525,7 @@ const FrancaisPage = () => {
         <Navbard />
         <div className="" style={{ textAlign: "center", marginTop: -70 }}>
           <h1 style={{ color: "white", fontSize: 52, paddingTop: 130 }}>
-            CASANOVA
+           ASTRAGALE
           </h1>
           <p
             style={{

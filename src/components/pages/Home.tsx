@@ -20,7 +20,7 @@ const Home = () => {
               paddingLeft: 740,
             }}
           >
-            NOUS SOMME
+            NOUS SOMMES
           </h1>
           <p
             style={{

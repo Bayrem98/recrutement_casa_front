@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import FrancaisPage from "./components/pages/Fr";
 import AnglaisPage from "./components/pages/En";
 import UsersTable from "./components/AdminDashboard/users/UsersTable";
+import AdminsTable from "./components/AdminDashboard/admin/AdminTable";
+import DashboardAdmin from "./components/pages/DashboardAdmin";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/fr" element={<FrancaisPage />} />
         <Route path="/en" element={<AnglaisPage />} />
         <Route path="/table" element={<UsersTable />} />
+        <Route path="/tablea" element={<AdminsTable />} />
+        <Route path="/dashboard" element={<DashboardAdmin />} />
       </Routes>
     </div>
   );

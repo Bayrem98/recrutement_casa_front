@@ -134,6 +134,7 @@ const AnglaisPage = () => {
   const [question2, setQuestion2] = useState<string>("");
   const [question3, setQuestion3] = useState<string>("");
   const [cover_cv, setCover_cv] = useState<any>();
+  const [status, setStatus] = useState<string>("");
 
   const changeCoverHandler = (event: any) => {
     const selectedCover = event.target.files[0];
@@ -178,6 +179,7 @@ const AnglaisPage = () => {
       question2,
       question3,
       cover_cv,
+      status,
     };
     addUser(newUser, () => {
       window.location.reload();
@@ -204,6 +206,7 @@ const AnglaisPage = () => {
     setQuestion2("");
     setQuestion3("");
     setCover_cv("");
+    setStatus("");
   };
 
   const FirstContent = (

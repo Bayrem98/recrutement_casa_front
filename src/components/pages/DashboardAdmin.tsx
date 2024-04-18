@@ -5,24 +5,59 @@ import {
   CardHeader,
   FormGroup,
   Input,
-  Label,
+  Modal,
+  ModalBody,
+  ModalHeader,
   Table,
 } from "reactstrap";
 import Navbard3 from "../parts/Navbard3";
 import Sidebar from "../parts/Sidebar";
 import { useEffect, useState } from "react";
 import Users from "../../@types/Users";
-import { getUsers } from "../../actions/Users/action";
+import { getUser, getUsers } from "../../actions/Users/action";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import { DesktopOutlined } from "@ant-design/icons";
+import { useParams } from "react-router-dom";
+import { Steps } from "antd";
 
 const DashboardAdmin = () => {
+  let { userId } = useParams();
   const [users, setUsers] = useState<Users[]>([]);
+  const [oneUser, setOneUser] = useState<Users | null>(null);
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [dateRDV, setDateRDV] = useState("");
+  const [userStatus, setUserStatus] = useState<{
+    [userId: string]: { status: string; color: string };
+  }>({});
+
+  const changeColor = (userId: string, newStatus: string, newColor: string) => {
+    setUserStatus((prevState) => ({
+      ...prevState,
+      [userId]: { status: newStatus, color: newColor },
+    }));
+  };
+
+  const handleDateChange = (event: any) => {
+    const newDate = event.target.value;
+    setDateRDV(newDate);
+  };
 
   useEffect(() => {
     getUsers(setUsers);
   }, []);
+
+  useEffect(() => {
+    if (userId) {
+      getUser(userId, setOneUser);
+    }
+  }, [userId]);
+
+  const openUserModal = (user: Users) => {
+    setOneUser({ ...user, status: user.status || "" });
+    setIsOpened(true);
+  };
+
   return (
     <>
       <div className="fr-page">
@@ -31,8 +66,7 @@ const DashboardAdmin = () => {
           <Sidebar />
           <Card
             style={{
-              width: "100%",
-              height: 179,
+              height: 130,
               marginTop: 108,
               marginLeft: 10,
               marginRight: 10,
@@ -45,29 +79,69 @@ const DashboardAdmin = () => {
             <CardBody>
               <div className="d-felx justify-content">
                 <div className="d-flex justify-content">
-                  <p>Légendaire couleur</p>
-                  <Button color="success" style={{ marginLeft: 10 }}>
+                  <p>Légendaire Couleur :</p>
+                  <Card
+                    color="white"
+                    style={{
+                      marginLeft: 10,
+                      color: "black",
+                      width: 100,
+                      height: 40,
+                      textAlign: "center",
+                    }}
+                  >
+                    Pas encore
+                  </Card>
+                  <Card
+                    color="success"
+                    style={{
+                      marginLeft: 10,
+                      color: "white",
+                      width: 100,
+                      height: 40,
+                      textAlign: "center",
+                    }}
+                  >
                     Accepter
-                  </Button>
-                  <Button
+                  </Card>
+                  <Card
                     color="warning"
-                    style={{ marginRight: 10, marginLeft: 10 }}
+                    style={{
+                      marginRight: 10,
+                      marginLeft: 10,
+                      color: "white",
+                      width: 100,
+                      height: 40,
+                      textAlign: "center",
+                    }}
                   >
                     En cours
-                  </Button>
-                  <Button color="danger">Réfuser</Button>
+                  </Card>
+                  <Card
+                    color="danger"
+                    style={{
+                      color: "white",
+                      width: 100,
+                      height: 40,
+                      textAlign: "center",
+                    }}
+                  >
+                    Réfuser
+                  </Card>
                 </div>
                 <div
                   className="d-flex justify-content"
-                  style={{ position: "absolute", left: 500, top: 60 }}
+                  style={{ position: "absolute", left: 600, top: 60 }}
                 >
                   <FormGroup style={{ marginRight: 30, marginLeft: 100 }}>
-                    <Label>Date</Label>
-                    <Input type="date" style={{ width: 135 }} />
+                    <Input type="date" style={{ width: 150 }} />
                   </FormGroup>
                   <FormGroup>
-                    <Label>Filter</Label>
-                    <Input type="text" style={{ width: 120 }} />
+                    <Input
+                      placeholder="Recherche içi..."
+                      type="text"
+                      style={{ width: 150 }}
+                    />
                   </FormGroup>
                 </div>
               </div>
@@ -113,10 +187,22 @@ const DashboardAdmin = () => {
                   <td>{user.email}</td>
                   <td>{user.situation}</td>
                   <td>
-                    <Button color="warning"></Button>
+                    <Card
+                      style={{
+                        height: 30,
+                        backgroundColor:
+                          user && user._id && userStatus[user._id]
+                            ? userStatus[user._id].color
+                            : "",
+                      }}
+                    >
+                      {user && user._id && userStatus[user._id]
+                        ? userStatus[user._id].status
+                        : user.status}
+                    </Card>
                   </td>
                   <td>
-                    <Button outline>
+                    <Button outline onClick={() => openUserModal(user)}>
                       <DesktopOutlined />
                     </Button>
                   </td>
@@ -137,6 +223,224 @@ const DashboardAdmin = () => {
             )}
           </tbody>
         </Table>
+        <Modal
+          centered
+          scrollable
+          isOpen={isOpened}
+          toggle={() => setIsOpened(!isOpened)}
+          style={{ minWidth: 1000 }}
+        >
+          <ModalHeader style={{ backgroundColor: "gray" }}>
+            <div className="d-flex justify-content-between">
+              <p style={{ fontSize: 14 }}>Nom et Prénom:</p>
+              <h5 style={{ color: "white", marginLeft: 30 }}>
+                {oneUser && oneUser.nom} {oneUser && oneUser.prenom}
+              </h5>
+              <span
+                onClick={() => setIsOpened(false)}
+                style={{
+                  cursor: "pointer",
+                  position: "absolute",
+                  right: 10,
+                  color: "white",
+                }}
+              >
+                X
+              </span>
+            </div>
+          </ModalHeader>
+          <ModalBody>
+            <Steps
+              progressDot
+              current={6}
+              direction="vertical"
+              items={[
+                {
+                  title: <h4>Coordonnées Personnelle :</h4>,
+                  description: (
+                    <div>
+                      <div className="d-flex justify-content">
+                        <h6 style={{ marginRight: 8, marginLeft: 20 }}>
+                          Numéro CIN:
+                        </h6>
+                        {oneUser && oneUser.num_cin}
+                        <h6 style={{ marginLeft: 348, marginRight: 8 }}>
+                          Date de naissance:
+                        </h6>
+                        {oneUser && oneUser.date_naiss}
+                      </div>
+                      <br />
+                      <div className="d-flex justify-content">
+                        <h6 style={{ marginRight: 8, marginLeft: 20 }}>
+                          Numéro de téléphone:
+                        </h6>
+                        {oneUser && oneUser.num_tel1}/
+                        {oneUser && oneUser.num_tel2}
+                        <h6 style={{ marginLeft: 275, marginRight: 8 }}>
+                          Adresse:
+                        </h6>
+                        {oneUser && oneUser.adresse}
+                      </div>
+                      <br />
+                      <div className="d-flex justify-content">
+                        <h6 style={{ marginRight: 8, marginLeft: 20 }}>
+                          Ville:
+                        </h6>
+                        {oneUser && oneUser.ville}
+                        <h6 style={{ marginLeft: 425, marginRight: 8 }}>
+                          Code postal:
+                        </h6>
+                        {oneUser && oneUser.code_p}
+                      </div>
+                      <br />
+                      <div className="d-flex justify-content">
+                        <h6 style={{ marginRight: 8, marginLeft: 20 }}>
+                          Email:
+                        </h6>
+                        {oneUser && oneUser.email}
+                        <h6 style={{ marginLeft: 286, marginRight: 8 }}>
+                          Situation familiale:
+                        </h6>
+                        {oneUser && oneUser.situation}
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  title: <h4>Etudes et Expériences:</h4>,
+                  description: (
+                    <div>
+                      <div className="d-flex justify-content">
+                        <h6 style={{ marginRight: 8, marginLeft: 20 }}>
+                          Niveau d'etude:
+                        </h6>
+                        {oneUser && oneUser.niveau}
+                        <h6 style={{ marginLeft: 320, marginRight: 8 }}>
+                          Spécialite:
+                        </h6>
+                        {oneUser && oneUser.specia}
+                      </div>
+                      <br />
+                      <div className="d-flex justify-content">
+                        <h6 style={{ marginRight: 8, marginLeft: 20 }}>
+                          Experience professionnelle:
+                        </h6>
+                        {oneUser && oneUser.experi}
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  title: <h4>Divers :</h4>,
+                  description: (
+                    <div>
+                      <h6> 1-Avez-vous déjà entendu parler de nous ?</h6>
+                      <p>Réponse :</p>
+                      {oneUser && oneUser.question1}
+                      <br />
+                      <br />
+                      <h6>2-Quelles sont vos motivations pour ce poste ?</h6>
+                      <p>Réponse :</p>
+                      {oneUser && oneUser.question2}
+                      <br />
+                      <br />
+                      <h6>
+                        3-Avez-vous une idée plus précise sur la nature de notre
+                        activité ?
+                      </h6>
+                      <p>Réponse :</p>
+                      {oneUser && oneUser.question3}
+                    </div>
+                  ),
+                },
+                {
+                  title: <h4>Curriculum Vitae :</h4>,
+                  description: (
+                    <div>
+                      <Card style={{ width: 500, height: 300 }}>
+                        <img src={oneUser?.cover_cv} alt="." width={200} />
+                      </Card>
+                    </div>
+                  ),
+                },
+                {
+                  title: <h4>Auteur :</h4>,
+                  description: (
+                    <div>
+                      <p>Le nom de responsable traite la demande</p>
+                    </div>
+                  ),
+                },
+                {
+                  title: <h4>RDV Fixe :</h4>,
+                  description: (
+                    <div>
+                      <Input
+                        type="date"
+                        style={{ width: 200 }}
+                        onChange={handleDateChange}
+                      />
+                      <br />
+                      {dateRDV && (
+                        <p>RDV fixé par ............. le {dateRDV}</p>
+                      )}
+                      <Button color="info" style={{ color: "white" }}>
+                        Valider le RDV
+                      </Button>
+                    </div>
+                  ),
+                },
+                {
+                  title: <h4>Responsable Reponse :</h4>,
+                  description: (
+                    <div>
+                      <br />
+                      <Button
+                        block
+                        outline
+                        color="success"
+                        onClick={() => {
+                          oneUser &&
+                            oneUser._id &&
+                            changeColor(oneUser._id, "Accepter", "green");
+                          setIsOpened(false);
+                        }}
+                      >
+                        Accepter
+                      </Button>
+                      <Button
+                        block
+                        outline
+                        color="warning"
+                        onClick={() => {
+                          oneUser &&
+                            oneUser._id &&
+                            changeColor(oneUser._id, "En cours", "yellow");
+                          setIsOpened(false);
+                        }}
+                      >
+                        En cours
+                      </Button>
+                      <Button
+                        block
+                        outline
+                        color="danger"
+                        onClick={() => {
+                          oneUser &&
+                            oneUser._id &&
+                            changeColor(oneUser._id, "Réfuser", "red");
+                          setIsOpened(false);
+                        }}
+                      >
+                        Réfuser
+                      </Button>
+                    </div>
+                  ),
+                },
+              ]}
+            />
+          </ModalBody>
+        </Modal>
       </div>
     </>
   );

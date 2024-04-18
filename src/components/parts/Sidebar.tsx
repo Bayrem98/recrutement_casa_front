@@ -31,6 +31,7 @@ const items: MenuItem[] = [
   getItem("Candidateurs", "1", <PieChartOutlined />),
   getItem("Agenda RDV", "2", <DesktopOutlined />),
   getItem("Ajouter Candidat", "3", <ContainerOutlined />),
+  getItem("Candidat Accepter", "4", <ContainerOutlined />),
 
   getItem("Parametres", "sub1", <MailOutlined />, [
     getItem("Profil", "5"),
@@ -46,7 +47,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div style={{ width: 200 }}>
+      <div style={{ width: 190 }}>
         <div className="d-flex justify-content">
           <Button
             type="primary"
@@ -65,7 +66,6 @@ const Sidebar = () => {
         <Menu
           style={{ borderRadius: 10, marginLeft: 5 }}
           defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
           mode="inline"
           theme="light"
           inlineCollapsed={collapsed}

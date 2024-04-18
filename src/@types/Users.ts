@@ -18,4 +18,5 @@ export default interface Users {
   question2: string;
   question3: string;
   cover_cv: string;
+  status?: string;
 }

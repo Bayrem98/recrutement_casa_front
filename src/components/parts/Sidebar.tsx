@@ -9,6 +9,8 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button, Menu } from "antd";
+import UserAdd from "../AdminDashboard/users/UserAdd";
+import { Link } from "react-router-dom";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -28,16 +30,29 @@ function getItem(
   } as MenuItem;
 }
 const items: MenuItem[] = [
-  getItem("Candidateurs", "1", <PieChartOutlined />),
+  getItem(
+    <Link to={"/dashboard"} style={{ textDecoration: "none" }}>
+      Candidateurs
+    </Link>,
+    "1",
+    <PieChartOutlined />
+  ),
   getItem("Agenda RDV", "2", <DesktopOutlined />),
-  getItem("Ajouter Candidat", "3", <ContainerOutlined />),
-  getItem("Candidat Accepter", "4", <ContainerOutlined />),
+  getItem(
+    <Link to={"/candidataccepte"} style={{ textDecoration: "none" }}>
+      Candidat Accepter
+    </Link>,
+    "3",
+    <ContainerOutlined />
+  ),
+  getItem(<UserAdd />, "4", <ContainerOutlined />),
 
   getItem("Parametres", "sub1", <MailOutlined />, [
     getItem("Profil", "5"),
     getItem("Déconnexion", "6"),
   ]),
 ];
+
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -50,7 +65,6 @@ const Sidebar = () => {
       <div style={{ width: 190 }}>
         <div className="d-flex justify-content">
           <Button
-            type="primary"
             onClick={toggleCollapsed}
             style={{
               marginBottom: 5,
@@ -65,7 +79,6 @@ const Sidebar = () => {
         </div>
         <Menu
           style={{ borderRadius: 10, marginLeft: 5 }}
-          defaultSelectedKeys={["1"]}
           mode="inline"
           theme="light"
           inlineCollapsed={collapsed}

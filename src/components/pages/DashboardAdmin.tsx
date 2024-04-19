@@ -20,6 +20,7 @@ import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import { DesktopOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import { Steps } from "antd";
+import UserDelete from "../AdminDashboard/users/UsersDelete";
 
 const DashboardAdmin = () => {
   let { userId } = useParams();
@@ -30,6 +31,7 @@ const DashboardAdmin = () => {
   const [userStatus, setUserStatus] = useState<{
     [userId: string]: { status: string; color: string };
   }>({});
+  const [filter, setFilter] = useState<string>("");
 
   const changeColor = (userId: string, newStatus: string, newColor: string) => {
     setUserStatus((prevState) => ({
@@ -138,7 +140,9 @@ const DashboardAdmin = () => {
                   </FormGroup>
                   <FormGroup>
                     <Input
-                      placeholder="Recherche içi..."
+                      placeholder="Chercher içi..."
+                      value={filter}
+                      onChange={(e) => setFilter(e.target.value)}
                       type="text"
                       style={{ width: 150 }}
                     />
@@ -172,42 +176,49 @@ const DashboardAdmin = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(users) && users.length ? (
-              users.map((user) => (
-                <tr key={user._id} style={{ fontSize: 12 }}>
-                  <td>{user.nom}</td>
-                  <td>{user.prenom}</td>
-                  <td>{user.num_cin}</td>
-                  <td>{user.date_naiss}</td>
-                  <td>{user.num_tel1}</td>
-                  <td>{user.num_tel2}</td>
-                  <td>{user.adresse}</td>
-                  <td>{user.ville}</td>
-                  <td>{user.code_p}</td>
-                  <td>{user.email}</td>
-                  <td>{user.situation}</td>
-                  <td>
-                    <Card
-                      style={{
-                        height: 30,
-                        backgroundColor:
-                          user && user._id && userStatus[user._id]
-                            ? userStatus[user._id].color
-                            : "",
-                      }}
-                    >
-                      {user && user._id && userStatus[user._id]
-                        ? userStatus[user._id].status
-                        : user.status}
-                    </Card>
-                  </td>
-                  <td>
-                    <Button outline onClick={() => openUserModal(user)}>
-                      <DesktopOutlined />
-                    </Button>
-                  </td>
-                </tr>
-              ))
+            {users.length ? (
+              users
+                .filter(
+                  (user) =>
+                    user.nom.toLowerCase().includes(filter.toLowerCase()) &&
+                    user.prenom.toLowerCase().includes(filter.toLowerCase()) &&
+                    user.num_cin.toLowerCase().includes(filter.toLowerCase())
+                )
+                .map((user) => (
+                  <tr key={user._id} style={{ fontSize: 12 }}>
+                    <td>{user.nom}</td>
+                    <td>{user.prenom}</td>
+                    <td>{user.num_cin}</td>
+                    <td>{user.date_naiss}</td>
+                    <td>{user.num_tel1}</td>
+                    <td>{user.num_tel2}</td>
+                    <td>{user.adresse}</td>
+                    <td>{user.ville}</td>
+                    <td>{user.code_p}</td>
+                    <td>{user.email}</td>
+                    <td>{user.situation}</td>
+                    <td>
+                      <Card
+                        style={{
+                          height: 30,
+                          backgroundColor:
+                            user && user._id && userStatus[user._id]
+                              ? userStatus[user._id].color
+                              : "",
+                        }}
+                      >
+                        {user && user._id && userStatus[user._id]
+                          ? userStatus[user._id].status
+                          : user.status}
+                      </Card>
+                    </td>
+                    <td>
+                      <Button outline onClick={() => openUserModal(user)}>
+                        <DesktopOutlined />
+                      </Button>
+                    </td>
+                  </tr>
+                ))
             ) : (
               <tr>
                 <td
@@ -250,6 +261,12 @@ const DashboardAdmin = () => {
             </div>
           </ModalHeader>
           <ModalBody>
+            <div style={{ position: "absolute", right: 10 }}>
+              {oneUser && (
+                <UserDelete user={oneUser} refresh={() => getUsers(setUsers)} />
+              )}
+            </div>
+            <br />
             <Steps
               progressDot
               current={6}

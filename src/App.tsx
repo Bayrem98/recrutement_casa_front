@@ -8,6 +8,7 @@ import AnglaisPage from "./components/pages/En";
 import UsersTable from "./components/AdminDashboard/users/UsersTable";
 import AdminsTable from "./components/AdminDashboard/admin/AdminTable";
 import DashboardAdmin from "./components/pages/DashboardAdmin";
+import CandidatAccepte from "./components/pages/CandidatAccepte";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/table" element={<UsersTable />} />
         <Route path="/tablea" element={<AdminsTable />} />
         <Route path="/dashboard" element={<DashboardAdmin />} />
+        <Route path="/candidataccepte" element={<CandidatAccepte />} />
       </Routes>
     </div>
   );

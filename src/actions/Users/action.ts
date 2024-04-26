@@ -1,9 +1,13 @@
 import axios from "axios";
 import Users from "../../@types/Users";
 
-export function getUsers(callback: (data: Users[]) => void) {
+export function getUsers(
+  query: { nom?: string; status: { status: string; color: string } } | null,
+  callback: (data: Users[]) => void
+) {
   axios
     .get(`http://localhost:3001/users`, {
+      params: query,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },

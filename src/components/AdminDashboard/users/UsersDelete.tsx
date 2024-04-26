@@ -16,6 +16,7 @@ const UserDelete = ({ user, refresh }: UserDeletePropsType) => {
   const submit = () => {
     deleteUser(user, () => {
       refresh();
+      window.location.reload();
       setIsOpened(false);
     });
   };

@@ -71,7 +71,7 @@ const UserAdd = () => {
   const [question2, setQuestion2] = useState<string>("");
   const [question3, setQuestion3] = useState<string>("");
   const [cover_cv, setCover_cv] = useState<any>();
-  const [status, setStatus] = useState<string>("");
+  const [newStatus, setNewStatus] = useState<string>("");
 
   const changeCoverHandler = (event: any) => {
     const selectedCover = event.target.files[0];
@@ -115,7 +115,7 @@ const UserAdd = () => {
       question2,
       question3,
       cover_cv,
-      status,
+      status: { status: newStatus, color: "someColor" },
     };
     addUser(newUser, () => {
       setIsOpened(false);
@@ -142,7 +142,7 @@ const UserAdd = () => {
     setQuestion2("");
     setQuestion3("");
     setCover_cv("");
-    setStatus("");
+    setNewStatus("");
   };
 
   return (
@@ -359,15 +359,19 @@ const UserAdd = () => {
                   </Label>
                   <div>
                     <Checkbox
-                      value={question1}
-                      onChange={() => handleQuestion1Change}
+                      checked={question1 === "Oui"}
+                      onChange={(e) =>
+                        handleQuestion1Change(e.target.checked ? "Oui" : "Non")
+                      }
                     >
                       Oui
                     </Checkbox>
                     <br />
                     <Checkbox
-                      value={question1}
-                      onChange={() => handleQuestion1Change}
+                      checked={question1 === "Non"}
+                      onChange={(e) =>
+                        handleQuestion1Change(e.target.checked ? "Non" : "Oui")
+                      }
                     >
                       Non
                     </Checkbox>

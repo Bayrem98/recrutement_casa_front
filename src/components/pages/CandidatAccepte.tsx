@@ -14,7 +14,7 @@ import Navbard3 from "../parts/Navbard3";
 import Sidebar from "../parts/Sidebar";
 import { useEffect, useState } from "react";
 import Users from "../../@types/Users";
-import { getUser, getUsers } from "../../actions/Users/action";
+import { getUsers } from "../../actions/Users/action";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
@@ -24,39 +24,38 @@ import { Steps } from "antd";
 
 const CandidatAccepte = () => {
   let { userId } = useParams();
+  let { stat } = useParams();
   const [filter, setFilter] = useState<string>("");
   const [users, setUsers] = useState<Users[]>([]);
-  const [oneUser, setOneUser] = useState<Users | null>(null);
+  const [oneUser, setOneUser] = useState<Users | undefined>();
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [userStatus, setUserStatus] = useState<{
     [userId: string]: { status: string; color: string };
   }>({});
 
-  const changeColor = (userId: string, newStatus: string, newColor: string) => {
-    setUserStatus((prevState) => ({
-      ...prevState,
-      [userId]: { status: newStatus, color: newColor },
-    }));
-  };
-
   useEffect(() => {
-    getUsers(setUsers);
-  }, []);
-
-  useEffect(() => {
-    if (userId) {
-      getUser(userId, setOneUser);
+    getUsers({ status: { status: "Accepter", color: "green" } }, setUsers);
+    if (users) {
+      setOneUser(users[0]);
     }
-  }, [userId]);
+  }, [stat, userId, users]);
 
   const openUserModal = (user: Users) => {
-    setOneUser({ ...user, status: user.status || "" });
+    const storedStatus = localStorage.getItem(`userStatus_${user._id || ""}`);
+    const status = storedStatus
+      ? JSON.parse(storedStatus)
+      : { status: "", color: "" };
+
+    setOneUser({
+      ...user,
+      status: status,
+    });
     setIsOpened(true);
   };
 
   return (
     <>
-      <div className="fr-page">
+      <div className="fr-page" style={{ paddingBottom: 420 }}>
         <Navbard3 />
         <div className="d-flex justify-content">
           <Sidebar />
@@ -71,7 +70,7 @@ const CandidatAccepte = () => {
             }}
           >
             <CardHeader>
-              <h5>Tableaux des candidats accepté</h5>
+              <h5>Tableaux des Candidats Accepter</h5>
             </CardHeader>
             <CardBody>
               <div className="d-flex justify-content">
@@ -118,13 +117,8 @@ const CandidatAccepte = () => {
             <tbody>
               {users.length ? (
                 users
-                  .filter(
-                    (user) =>
-                      user.nom.toLowerCase().includes(filter.toLowerCase()) &&
-                      user.prenom
-                        .toLowerCase()
-                        .includes(filter.toLowerCase()) &&
-                      user.num_cin.toLowerCase().includes(filter.toLowerCase())
+                  .filter((user) =>
+                    user.nom.toLowerCase().includes(filter.toLowerCase())
                   )
                   .map((user) => (
                     <tr key={user._id} style={{ fontSize: 12 }}>
@@ -141,17 +135,22 @@ const CandidatAccepte = () => {
                       <td>{user.situation}</td>
                       <td>
                         <Card
+                          color="success"
                           style={{
-                            height: 30,
+                            height: 35,
+                            width: 100,
                             backgroundColor:
                               user && user._id && userStatus[user._id]
                                 ? userStatus[user._id].color
                                 : "",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
                           }}
                         >
                           {user && user._id && userStatus[user._id]
                             ? userStatus[user._id].status
-                            : user.status}
+                            : user.status?.status}
                         </Card>
                       </td>
                       <td>
@@ -207,7 +206,7 @@ const CandidatAccepte = () => {
                 {oneUser && (
                   <UserDelete
                     user={oneUser}
-                    refresh={() => getUsers(setUsers)}
+                    refresh={() => getUsers(null, setUsers)}
                   />
                 )}
               </div>

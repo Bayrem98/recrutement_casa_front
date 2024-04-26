@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import {
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
+  CheckCircleOutlined,
+  LogoutOutlined,
+  CalendarOutlined,
+  SettingOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  PieChartOutlined,
+  TeamOutlined,
+  UserAddOutlined,
+  ProfileOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button, Menu } from "antd";
 import UserAdd from "../AdminDashboard/users/UserAdd";
 import { Link } from "react-router-dom";
+import { logout } from "../../actions/auth/action";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -35,21 +39,37 @@ const items: MenuItem[] = [
       Candidateurs
     </Link>,
     "1",
-    <PieChartOutlined />
+    <TeamOutlined style={{ fontSize: 17 }} />
   ),
-  getItem("Agenda RDV", "2", <DesktopOutlined />),
   getItem(
-    <Link to={"/candidataccepte"} style={{ textDecoration: "none" }}>
+    <Link to={"/agendardv"} style={{ textDecoration: "none" }}>
+      Agenda RDV
+    </Link>,
+    "2",
+    <CalendarOutlined style={{ fontSize: 17 }} />
+  ),
+  getItem(
+    <Link to={"/candidataccepte/Accepter"} style={{ textDecoration: "none" }}>
       Candidat Accepter
     </Link>,
     "3",
-    <ContainerOutlined />
+    <CheckCircleOutlined style={{ fontSize: 17 }} />
   ),
-  getItem(<UserAdd />, "4", <ContainerOutlined />),
+  getItem(<UserAdd />, "4", <UserAddOutlined style={{ fontSize: 17 }} />),
 
-  getItem("Parametres", "sub1", <MailOutlined />, [
-    getItem("Profil", "5"),
-    getItem("Déconnexion", "6"),
+  getItem("Parametres", "sub1", <SettingOutlined style={{ fontSize: 17 }} />, [
+    getItem(
+      <Link to={"/profil"} style={{ textDecoration: "none" }}>
+        Profil
+      </Link>,
+      "5",
+      <ProfileOutlined style={{ fontSize: 18 }} />
+    ),
+    getItem(
+      <div onClick={() => logout()}>Déconnexion</div>,
+      "6",
+      <LogoutOutlined style={{ fontSize: 18 }} />
+    ),
   ]),
 ];
 
@@ -73,7 +93,11 @@ const Sidebar = () => {
               marginRight: 5,
             }}
           >
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            {collapsed ? (
+              <MenuUnfoldOutlined style={{ fontSize: 20 }} />
+            ) : (
+              <MenuFoldOutlined style={{ fontSize: 20 }} />
+            )}
           </Button>
           <h5 style={{ color: "white", marginTop: 73 }}>MENU</h5>
         </div>

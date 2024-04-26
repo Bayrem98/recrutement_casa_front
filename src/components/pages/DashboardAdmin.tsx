@@ -5,6 +5,7 @@ import {
   CardHeader,
   FormGroup,
   Input,
+  Label,
   Modal,
   ModalBody,
   ModalHeader,
@@ -21,6 +22,25 @@ import { DesktopOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import { Steps } from "antd";
 import UserDelete from "../AdminDashboard/users/UsersDelete";
+import axios from "axios";
+import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+import Admin from "../../@types/Admin";
+import { getAdmin } from "../../actions/Admin/action";
+
+const fields = [
+  {
+    key: "Accepter",
+    name: "Accepter",
+  },
+  {
+    key: "En cours",
+    name: "En cours",
+  },
+  {
+    key: "Réfuser",
+    name: "Réfuser",
+  },
+];
 
 const DashboardAdmin = () => {
   let { userId } = useParams();
@@ -32,21 +52,24 @@ const DashboardAdmin = () => {
     [userId: string]: { status: string; color: string };
   }>({});
   const [filter, setFilter] = useState<string>("");
-
-  const changeColor = (userId: string, newStatus: string, newColor: string) => {
-    setUserStatus((prevState) => ({
-      ...prevState,
-      [userId]: { status: newStatus, color: newColor },
-    }));
-  };
+  const [filter2, setFilter2] = useState<string>("");
+  const [formateur, setFormateur] = useState<Admin | null>(null);
 
   const handleDateChange = (event: any) => {
     const newDate = event.target.value;
     setDateRDV(newDate);
   };
 
+  const userIda = localStorage.getItem("user_id");
+
   useEffect(() => {
-    getUsers(setUsers);
+    if (userIda) {
+      getAdmin(userIda, setFormateur);
+    }
+  }, [userIda]);
+
+  useEffect(() => {
+    getUsers(null, setUsers);
   }, []);
 
   useEffect(() => {
@@ -56,13 +79,80 @@ const DashboardAdmin = () => {
   }, [userId]);
 
   const openUserModal = (user: Users) => {
-    setOneUser({ ...user, status: user.status || "" });
+    const storedStatus = localStorage.getItem(`userStatus_${user._id || ""}`);
+    const status = storedStatus
+      ? JSON.parse(storedStatus)
+      : { status: "", color: "" };
+
+    setOneUser({
+      ...user,
+      status: status,
+    });
     setIsOpened(true);
+  };
+
+  const handleChangeStatus = (
+    userId: string,
+    newStatus: string,
+    newColor: string
+  ) => {
+    // Mettre à jour l'état local
+    setUserStatus((prevState) => ({
+      ...prevState,
+      [userId]: { status: newStatus, color: newColor },
+    }));
+    window.location.reload();
+
+    // Stocker les données dans le stockage local du navigateur
+    localStorage.setItem(
+      `userStatus_${userId}`,
+      JSON.stringify({ status: newStatus, color: newColor })
+    );
+
+    // Envoyer la requête au serveur
+    axios
+      .put(`http://localhost:3001/users/changestatus/${userId}`, {
+        status: { status: newStatus, color: newColor }, // Envoyer un objet contenant à la fois l'état et la couleur
+      })
+      .then((response) => {
+        console.log("Le statut de l'utilisateur a été changé", response.data);
+        setIsOpened(false);
+      })
+      .catch((error) => {
+        console.error(
+          "Erreur lors du changement du statut de l'utilisateur",
+          error
+        );
+      });
+  };
+
+  const docs = oneUser?.cover_cv ? [{ uri: oneUser.cover_cv }] : [];
+
+  const getStatusColor = (status: string): string => {
+    switch (status.toLowerCase()) {
+      case "accepter":
+        return "green";
+      case "réfuser":
+        return "red";
+      case "en cours":
+        return "yellow";
+      default:
+        return "";
+    }
+  };
+
+  const renderDisabledComponent = (user: Users | null): boolean => {
+    return (
+      !!user &&
+      !!user.status &&
+      user.status.status === "En cours" &&
+      user.status.color === "yellow"
+    );
   };
 
   return (
     <>
-      <div className="fr-page">
+      <div className="fr-page" style={{ paddingBottom: 400 }}>
         <Navbard3 />
         <div className="d-flex justify-content">
           <Sidebar />
@@ -140,12 +230,28 @@ const DashboardAdmin = () => {
                   </FormGroup>
                   <FormGroup>
                     <Input
-                      placeholder="Chercher içi..."
+                      placeholder="Filtre par nom"
                       value={filter}
                       onChange={(e) => setFilter(e.target.value)}
                       type="text"
                       style={{ width: 150 }}
                     />
+                    <Label style={{ color: "white", paddingTop: 10 }}>
+                      Filtre par status
+                    </Label>
+                    <Input
+                      value={filter2}
+                      onChange={(e) => setFilter2(e.target.value)}
+                      type="select"
+                      style={{ width: 150, cursor: "pointer" }}
+                    >
+                      <option value="">Tous status...</option>
+                      {fields.map((f) => (
+                        <option key={f.key} value={f.key}>
+                          {f.name}
+                        </option>
+                      ))}
+                    </Input>
                   </FormGroup>
                 </div>
               </div>
@@ -181,8 +287,9 @@ const DashboardAdmin = () => {
                 .filter(
                   (user) =>
                     user.nom.toLowerCase().includes(filter.toLowerCase()) &&
-                    user.prenom.toLowerCase().includes(filter.toLowerCase()) &&
-                    user.num_cin.toLowerCase().includes(filter.toLowerCase())
+                    user.status.status
+                      .toLowerCase()
+                      .includes(filter2.toLocaleLowerCase())
                 )
                 .map((user) => (
                   <tr key={user._id} style={{ fontSize: 12 }}>
@@ -200,16 +307,25 @@ const DashboardAdmin = () => {
                     <td>
                       <Card
                         style={{
-                          height: 30,
-                          backgroundColor:
-                            user && user._id && userStatus[user._id]
-                              ? userStatus[user._id].color
-                              : "",
+                          height: 35,
+                          width: 100,
+                          backgroundColor: getStatusColor(
+                            user?.status?.status || ""
+                          ),
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
-                        {user && user._id && userStatus[user._id]
-                          ? userStatus[user._id].status
-                          : user.status}
+                        <span
+                          style={{
+                            backgroundColor: getStatusColor(
+                              user?.status?.status || ""
+                            ),
+                          }}
+                        >
+                          {user?.status?.status}
+                        </span>
                       </Card>
                     </td>
                     <td>
@@ -263,7 +379,10 @@ const DashboardAdmin = () => {
           <ModalBody>
             <div style={{ position: "absolute", right: 10 }}>
               {oneUser && (
-                <UserDelete user={oneUser} refresh={() => getUsers(setUsers)} />
+                <UserDelete
+                  user={oneUser}
+                  refresh={() => getUsers(null, setUsers)}
+                />
               )}
             </div>
             <br />
@@ -374,37 +493,118 @@ const DashboardAdmin = () => {
                   title: <h4>Curriculum Vitae :</h4>,
                   description: (
                     <div>
-                      <Card style={{ width: 500, height: 300 }}>
-                        <img src={oneUser?.cover_cv} alt="." width={200} />
-                      </Card>
+                      <a href={oneUser?.cover_cv}>Télécharger et voir</a>
+                      <DocViewer
+                        documents={docs}
+                        pluginRenderers={DocViewerRenderers}
+                      />
                     </div>
                   ),
                 },
                 {
                   title: <h4>Auteur :</h4>,
                   description: (
-                    <div>
-                      <p>Le nom de responsable traite la demande</p>
+                    <div key={formateur?._id}>
+                      <p style={{ color: "black" }}>{formateur?.username}</p>
                     </div>
                   ),
                 },
                 {
-                  title: <h4>RDV Fixe :</h4>,
+                  title: <h4>Décision de auteur:</h4>,
                   description: (
-                    <div>
-                      <Input
-                        type="date"
-                        style={{ width: 200 }}
-                        onChange={handleDateChange}
-                      />
-                      <br />
-                      {dateRDV && (
-                        <p>RDV fixé par ............. le {dateRDV}</p>
-                      )}
-                      <Button color="info" style={{ color: "white" }}>
-                        Valider le RDV
-                      </Button>
-                    </div>
+                    <>
+                      <div className="">
+                        <FormGroup>
+                          <Label
+                            style={{
+                              fontSize: 18,
+                              color: "black",
+                              marginRight: 8,
+                            }}
+                          >
+                            Ne répond pas
+                          </Label>
+                          <Input
+                            disabled={renderDisabledComponent(oneUser)}
+                            type="radio"
+                            style={{ fontSize: 22, cursor: "pointer" }}
+                            onClick={() => {
+                              oneUser &&
+                                oneUser._id &&
+                                handleChangeStatus(
+                                  oneUser._id,
+                                  "En cours",
+                                  "yellow"
+                                );
+                              setIsOpened(false);
+                            }}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label
+                            style={{
+                              fontSize: 18,
+                              color: "black",
+                              marginRight: 8,
+                            }}
+                          >
+                            Fix RDV
+                          </Label>
+                          <div className="d-flex justify-content">
+                            <Input
+                              type="date"
+                              style={{ width: 200 }}
+                              onChange={handleDateChange}
+                            />
+                            <br />
+                            {dateRDV && (
+                              <p>RDV fixé par ............. le {dateRDV}</p>
+                            )}
+                            <Input
+                              type="radio"
+                              onClick={() => {
+                                oneUser &&
+                                  oneUser._id &&
+                                  handleChangeStatus(
+                                    oneUser._id,
+                                    "RDV",
+                                    "blue"
+                                  );
+                              }}
+                            ></Input>
+                            <Button color="info" style={{ color: "white" }}>
+                              Valider le RDV
+                            </Button>
+                          </div>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label
+                            style={{
+                              fontSize: 18,
+                              color: "black",
+                              marginRight: 8,
+                            }}
+                          >
+                            Réfuser
+                          </Label>
+                          <Input
+                            type="radio"
+                            style={{ fontSize: 22, cursor: "pointer" }}
+                            onClick={() => {
+                              oneUser &&
+                                oneUser._id &&
+                                handleChangeStatus(
+                                  oneUser._id,
+                                  "Réfuser",
+                                  "red"
+                                );
+                              setIsOpened(false);
+                            }}
+                          ></Input>
+                        </FormGroup>
+                      </div>
+                      <div></div>
+                    </>
                   ),
                 },
                 {
@@ -419,12 +619,17 @@ const DashboardAdmin = () => {
                         onClick={() => {
                           oneUser &&
                             oneUser._id &&
-                            changeColor(oneUser._id, "Accepter", "green");
+                            handleChangeStatus(
+                              oneUser._id,
+                              "Accepter",
+                              "green"
+                            );
                           setIsOpened(false);
                         }}
                       >
                         Accepter
                       </Button>
+                      <br />
                       <Button
                         block
                         outline
@@ -432,12 +637,17 @@ const DashboardAdmin = () => {
                         onClick={() => {
                           oneUser &&
                             oneUser._id &&
-                            changeColor(oneUser._id, "En cours", "yellow");
+                            handleChangeStatus(
+                              oneUser._id,
+                              "En cours",
+                              "yellow"
+                            );
                           setIsOpened(false);
                         }}
                       >
                         En cours
                       </Button>
+                      <br />
                       <Button
                         block
                         outline
@@ -445,7 +655,7 @@ const DashboardAdmin = () => {
                         onClick={() => {
                           oneUser &&
                             oneUser._id &&
-                            changeColor(oneUser._id, "Réfuser", "red");
+                            handleChangeStatus(oneUser._id, "Réfuser", "red");
                           setIsOpened(false);
                         }}
                       >

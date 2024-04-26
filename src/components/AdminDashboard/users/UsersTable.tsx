@@ -11,7 +11,7 @@ const UsersTable = (props: Props) => {
   const [users, setUsers] = useState<Users[]>([]);
 
   useEffect(() => {
-    getUsers(setUsers);
+    getUsers(null, setUsers);
   }, []);
 
   return (

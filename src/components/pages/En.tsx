@@ -179,7 +179,7 @@ const AnglaisPage = () => {
       question2,
       question3,
       cover_cv,
-      status,
+      status: { status: status, color: "someColor" },
     };
     addUser(newUser, () => {
       window.location.reload();

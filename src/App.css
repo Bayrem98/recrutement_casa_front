@@ -7,5 +7,10 @@
 .fr-page {
     background-image: url('/public/images/background-2.jpg');
     background-size: cover;
-    
+}
+
+.login-page {
+    background-image: url('/public/images/background-3.jpg');
+    background-size: cover;
+    height: 100vh;
 }

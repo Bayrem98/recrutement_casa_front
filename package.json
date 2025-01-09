@@ -16,7 +16,7 @@
     "@types/node": "^16.18.94",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
-    "antd": "^5.16.1",
+    "antd": "^5.23.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "js-cookie": "^3.0.5",

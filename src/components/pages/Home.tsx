@@ -36,7 +36,7 @@ const Home = () => {
             Vous voulez postuler pour un poste de télécoseiller en langue
           </p>
         </div>
-        <div className="" style={{ marginTop: 250, marginLeft: 50 }}>
+        <div className="" style={{ marginTop: 200, marginLeft: 50 }}>
           <Link to={"/fr"}>
             <Button
               color="warning"

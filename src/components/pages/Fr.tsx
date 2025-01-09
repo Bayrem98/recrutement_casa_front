@@ -527,12 +527,12 @@ const FrancaisPage = () => {
     <>
       <div className="fr-page">
         <Navbard />
-        <div style={{ paddingTop: 272, paddingBottom: 272 }}>
+        <div style={{ paddingTop: 240, paddingBottom: 272 }}>
           <h1
             style={{
               color: "white",
               fontSize: 52,
-              marginLeft: "40%",
+              marginLeft: "39%",
             }}
           >
             ASTRAGALE
@@ -541,7 +541,7 @@ const FrancaisPage = () => {
             style={{
               color: "white",
               width: 600,
-              marginLeft: "27%",
+              marginLeft: "29%",
               fontSize: 30,
               textAlign: "center",
             }}

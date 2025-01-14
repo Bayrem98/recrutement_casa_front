@@ -3,7 +3,7 @@ import Admin from "../../@types/Admin";
 
 export function getAdmins(callback: (data: Admin[]) => void) {
   axios
-    .get(`http://localhost:3001/admin`, {
+    .get(`${process.env.REACT_APP_API_URL}/admin`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
@@ -18,7 +18,7 @@ export function getAdmins(callback: (data: Admin[]) => void) {
 
 export function getAdmin(id: string, callback: (data: Admin) => void) {
   axios
-    .get(`http://localhost:3001/admin/` + id, {
+    .get(`${process.env.REACT_APP_API_URL}/admin/` + id, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
@@ -33,7 +33,7 @@ export function getAdmin(id: string, callback: (data: Admin) => void) {
 
 export function addAdmin(admin: Admin, callback: () => void) {
   axios
-    .post(`http://localhost:3001/admin`, admin)
+    .post(`${process.env.REACT_APP_API_URL}/admin`, admin)
     .then(() => {
       callback();
     })
@@ -44,7 +44,7 @@ export function addAdmin(admin: Admin, callback: () => void) {
 
 export function editAdmin(admin: Admin, callback: () => void) {
   axios
-    .put(`http://localhost:3001/admin/${admin._id}`, admin)
+    .put(`${process.env.REACT_APP_API_URL}/admin/${admin._id}`, admin)
     .then(() => {
       callback();
     })
@@ -55,7 +55,7 @@ export function editAdmin(admin: Admin, callback: () => void) {
 
 export function deleteAdmin(admin: Admin, callback: () => void) {
   axios
-    .delete(`http://localhost:3001/admin/${admin._id}`)
+    .delete(`${process.env.REACT_APP_API_URL}/admin/${admin._id}`)
     .then(() => {
       callback();
     })

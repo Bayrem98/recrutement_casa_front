@@ -140,7 +140,7 @@ const FrancaisPage = () => {
     const selectedCover = event.target.files[0];
     const formData = new FormData();
     formData.append("file", selectedCover);
-    fetch(`http://localhost:3001/cover`, {
+    fetch(`${process.env.REACT_APP_API_URL}/cover`, {
       method: "POST",
       body: formData,
     })

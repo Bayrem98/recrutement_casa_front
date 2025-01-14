@@ -111,7 +111,7 @@ const DashboardAdmin = () => {
 
     // Envoyer la requête au serveur
     axios
-      .put(`http://localhost:3001/users/changestatus/${userId}`, {
+      .put(`${process.env.REACT_APP_API_URL}/users/changestatus/${userId}`, {
         status: { status: newStatus, color: newColor }, // Envoyer un objet contenant à la fois l'état et la couleur
       })
       .then((response) => {

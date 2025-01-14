@@ -8,7 +8,7 @@ export function login(
   fallback: () => void
 ) {
   axios
-    .post(`http://localhost:3001/auth/login`, {
+    .post(`${process.env.REACT_APP_API_URL}/auth/login`, {
       username: username,
       password: pass,
     })

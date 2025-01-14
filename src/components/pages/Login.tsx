@@ -29,7 +29,7 @@ const Login = () => {
   const login = (event: any) => {
     event.preventDefault();
     axios
-      .post(`http://localhost:3001/auth/login`, {
+      .post(`${process.env.REACT_APP_API_URL}/auth/login`, {
         username,
         password,
       })
@@ -87,7 +87,7 @@ const Login = () => {
           </span>
         </p>
         <Card
-          style={{ width: 400, position: "absolute", top: 260, left: "34%" }}
+          style={{ width: 400, position: "absolute", top: 260, left: "36%" }}
         >
           <CardHeader style={{ textAlign: "center" }}>
             <p style={{ fontSize: 20 }}>CONNECTER VOUS</p>

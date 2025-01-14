@@ -6,7 +6,7 @@ export function getUsers(
   callback: (data: Users[]) => void
 ) {
   axios
-    .get(`http://localhost:3001/users`, {
+    .get(`${process.env.REACT_APP_API_URL}/users`, {
       params: query,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -22,7 +22,7 @@ export function getUsers(
 
 export function getUser(id: string, callback: (data: Users) => void) {
   axios
-    .get(`http://localhost:3001/users/` + id, {
+    .get(`${process.env.REACT_APP_API_URL}/users/` + id, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
@@ -37,7 +37,7 @@ export function getUser(id: string, callback: (data: Users) => void) {
 
 export function addUser(users: Users, callback: () => void) {
   axios
-    .post(`http://localhost:3001/users`, users)
+    .post(`${process.env.REACT_APP_API_URL}/users`, users)
     .then(() => {
       callback();
     })
@@ -48,7 +48,7 @@ export function addUser(users: Users, callback: () => void) {
 
 export function editUser(users: Users, callback: () => void) {
   axios
-    .put(`http://localhost:3001/users/${users._id}`, users)
+    .put(`${process.env.REACT_APP_API_URL}/users/${users._id}`, users)
     .then(() => {
       callback();
     })
@@ -59,7 +59,7 @@ export function editUser(users: Users, callback: () => void) {
 
 export function deleteUser(users: Users, callback: () => void) {
   axios
-    .delete(`http://localhost:3001/users/${users._id}`)
+    .delete(`${process.env.REACT_APP_API_URL}/users/${users._id}`)
     .then(() => {
       callback();
     })

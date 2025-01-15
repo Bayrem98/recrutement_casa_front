@@ -67,6 +67,10 @@
     background-size: auto;
   }
 
+  .div-nav {
+    padding-top: 30px;
+  }
+
   .nav-title-home {
     margin-left: 40px;
   }
@@ -119,6 +123,10 @@
   .home-page {
     background-image: url("/public/images/background-image.jpg");
     background-size: auto;
+  }
+
+  .div-nav {
+    padding-top: 30px;
   }
 
   .nav-title-home {

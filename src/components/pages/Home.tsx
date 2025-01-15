@@ -5,14 +5,16 @@ const Home = () => {
   return (
     <>
       <div className="home-page">
-        <NavbarBrand
-          className="nav-title-home"
-          href="/"
-          style={{ color: "white" }}
-        >
-          RECRUTEMENT{" "}
-          <span className="nav-title-home-span">ASTRAGALE & ULYSSE</span>
-        </NavbarBrand>
+        <div className="div-nav">
+          <NavbarBrand
+            className="nav-title-home"
+            href="/"
+            style={{ color: "white" }}
+          >
+            RECRUTEMENT{" "}
+            <span className="nav-title-home-span">ASTRAGALE & ULYSSE</span>
+          </NavbarBrand>
+        </div>
         <div>
           <h1
             className="home-para-title"

@@ -150,6 +150,29 @@ const DashboardAdmin = () => {
     );
   };
 
+  const handleSubmitRDV = () => {
+    if (!oneUser || !dateRDV) {
+      alert("Veuillez sélectionner un utilisateur et une date de RDV.");
+      return;
+    }
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/appointments`, {
+        userId: oneUser._id,
+        nom: oneUser.nom,
+        prenom: oneUser.prenom,
+        dateRDV: dateRDV,
+      })
+      .then((response) => {
+        alert("RDV fixé avec succès !");
+        console.log("RDV fixé :", response.data);
+        setIsOpened(false);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la fixation du RDV :", error);
+      });
+  };
+
   return (
     <>
       <div className="fr-page" style={{ paddingBottom: 400 }}>
@@ -560,8 +583,9 @@ const DashboardAdmin = () => {
                             {dateRDV && (
                               <p>RDV fixé par ............. le {dateRDV}</p>
                             )}
-                            <Input
-                              type="radio"
+                            <Button
+                              color="info"
+                              style={{ color: "white" }}
                               onClick={() => {
                                 oneUser &&
                                   oneUser._id &&
@@ -571,8 +595,32 @@ const DashboardAdmin = () => {
                                     "blue"
                                   );
                               }}
-                            ></Input>
-                            <Button color="info" style={{ color: "white" }}>
+                            >
+                              Valider le RDV
+                            </Button>
+                          </div>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label
+                            style={{
+                              fontSize: 18,
+                              color: "black",
+                              marginRight: 8,
+                            }}
+                          >
+                            Fix RDV
+                          </Label>
+                          <div className="d-flex align-items-center">
+                            <Input
+                              type="date"
+                              style={{ width: 200, marginRight: 10 }}
+                              onChange={handleDateChange}
+                            />
+                            <Button
+                              color="info"
+                              style={{ color: "white" }}
+                              onClick={handleSubmitRDV}
+                            >
                               Valider le RDV
                             </Button>
                           </div>

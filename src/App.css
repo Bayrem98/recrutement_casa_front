@@ -1,16 +1,116 @@
 .home-page {
-    background-image: url('/public/images/background-image.jpg');
-    background-size: cover;
-    height: 100vh;
+  background-image: url("/public/images/background-image.jpg");
+  background-size: cover;
+  height: 100vh;
 }
 
 .fr-page {
-    background-image: url('/public/images/background-2.jpg');
-    background-size: cover;
+  background-image: url("/public/images/background-2.jpg");
+  background-size: cover;
 }
 
 .login-page {
-    background-image: url('/public/images/background-3.jpg');
-    background-size: cover;
-    height: 100vh;
+  background-image: url("/public/images/background-3.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+
+.nav-title-home {
+  margin-left: 20px;
+}
+
+.nav-title-home-span {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.home-para-title {
+  font-size: 50px;
+  padding-top: 80px;
+  padding-left: 740px;
+}
+
+.home-para {
+  width: 600px;
+  margin-left: 580px;
+  font-size: 26px;
+  text-align: center;
+}
+
+.home-div-button {
+  margin-top: 200px;
+  margin-left: 50px;
+}
+
+.home-button-fr {
+  width: 180px;
+  margin-right: 50px;
+  height: 80px;
+}
+
+.home-button-en {
+  width: 180px;
+  height: 80px;
+}
+
+.home-footer {
+  position: fixed;
+  bottom: 0px;
+  left: 10px;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+@media screen and (min-width: 430px) {
+  .home-page {
+    background-image: url("/public/images/background-image.jpg");
+    background-size: auto;
+  }
+
+  .nav-title-home {
+    margin-left: 40px;
+  }
+
+  .nav-title-home-span {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .home-para-title {
+    font-size: 22px;
+    padding-top: 150px;
+    padding-left: 140px;
+    font-weight: bold;
+  }
+
+  .home-para {
+    width: 300px;
+    margin-left: 70px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .home-div-button {
+    margin-top: 150px;
+    margin-left: 40px;
+  }
+
+  .home-button-fr {
+    width: 150px;
+    margin-right: 50px;
+    height: 60px;
+  }
+
+  .home-button-en {
+    width: 150px;
+    height: 60px;
+  }
+
+  .home-footer {
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    font-size: 18px;
+    font-weight: lighter;
+  }
 }

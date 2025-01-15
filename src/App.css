@@ -114,3 +114,57 @@
     font-weight: lighter;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .home-page {
+    background-image: url("/public/images/background-image.jpg");
+    background-size: auto;
+  }
+
+  .nav-title-home {
+    margin-left: 40px;
+  }
+
+  .nav-title-home-span {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .home-para-title {
+    font-size: 22px;
+    padding-top: 130px;
+    padding-left: 100px;
+    font-weight: bold;
+  }
+
+  .home-para {
+    width: 300px;
+    margin-left: 30px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .home-div-button {
+    margin-top: 80px;
+    margin-left: 30px;
+  }
+
+  .home-button-fr {
+    width: 130px;
+    margin-right: 50px;
+    height: 70px;
+  }
+
+  .home-button-en {
+    width: 130px;
+    height: 70px;
+  }
+
+  .home-footer {
+    position: fixed;
+    bottom: 5px;
+    left: 1px;
+    font-size: 15px;
+    font-weight: lighter;
+  }
+}

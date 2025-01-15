@@ -61,7 +61,7 @@
   font-weight: lighter;
 }
 
-@media screen and (min-width: 430px) {
+@media screen and (max-width: 430px) {
   .home-page {
     background-image: url("/public/images/background-image.jpg");
     background-size: auto;

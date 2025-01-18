@@ -184,7 +184,6 @@ const FrancaisPage = () => {
     };
     addUser(newUser, () => {
       handleSubmit();
-      window.location.reload();
       reset();
     });
   };
@@ -221,6 +220,7 @@ const FrancaisPage = () => {
       .catch((error) => {
         console.error("Erreur lors de l'envoi de l'email:", error.message);
       });
+    window.location.replace("/");
   };
 
   const FirstContent = (

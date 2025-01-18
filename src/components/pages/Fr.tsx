@@ -183,8 +183,8 @@ const FrancaisPage = () => {
       status: { status: status, color: "someColor" },
     };
     addUser(newUser, () => {
+      handleSubmit();
       window.location.reload();
-      handleSubmit;
       reset();
     });
   };
@@ -211,8 +211,7 @@ const FrancaisPage = () => {
     setStatus("");
   };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     axios.post(`${process.env.REACT_APP_API_URL}/users`);
     alert("Email envoyé avec succès");
   };

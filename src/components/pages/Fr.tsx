@@ -25,6 +25,7 @@ import {
 } from "reactstrap";
 import Navbard from "../parts/Navbard";
 import { addUser } from "../../actions/Users/action";
+import axios from "axios";
 
 const fields = [
   { key: "Célibataire", name: "Célibataire" },
@@ -183,6 +184,7 @@ const FrancaisPage = () => {
     };
     addUser(newUser, () => {
       window.location.reload();
+      handleSubmit;
       reset();
     });
   };
@@ -207,6 +209,12 @@ const FrancaisPage = () => {
     setQuestion3("");
     setCover_cv("");
     setStatus("");
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    axios.post(`${process.env.REACT_APP_API_URL}/users`);
+    alert("Email envoyé avec succès");
   };
 
   const FirstContent = (
@@ -527,52 +535,39 @@ const FrancaisPage = () => {
     <>
       <div className="fr-page">
         <Navbard />
-        <div style={{ paddingTop: 240, paddingBottom: 272 }}>
+        <div className="section-astra-para">
           <h1
+            className="astra-title-para"
             style={{
               color: "white",
-              fontSize: 52,
-              marginLeft: "39%",
             }}
           >
             ASTRAGALE
           </h1>
           <p
+            className="astra-para"
             style={{
               color: "white",
-              width: 600,
-              marginLeft: "29%",
-              fontSize: 30,
-              textAlign: "center",
             }}
           >
             Centre d’appel spécialisé dans la psychologie et les relations
             humaines. Vous êtes dynamique avec l’envie de relever des défis,
-            Vous voulez postuler pour un poste de télécoseiller en langue
+            Déposez votre candidature.
           </p>
         </div>
-        <div style={{ marginLeft: 50, marginRight: 50 }}>
+        <div className="astra-section-card">
           <div id="formulaire">
-            <Card style={{ border: 0, marginBottom: 190 }}>
-              <p
-                style={{
-                  textAlign: "center",
-                  fontSize: 22,
-                  fontWeight: "bold",
-                  paddingTop: 65,
-                }}
-              >
-                DÉPOSER VOTRE CANDIDATURE
-              </p>
+            <Card className="astra-card">
+              <p className="astra-card-title">DÉPOSER VOTRE CANDIDATURE</p>
               <br />
               <Steps
+                className="astra-card-steps"
                 current={current}
                 items={items}
-                style={{ paddingLeft: 20, paddingRight: 20 }}
               />
               <CardBody>{renderContent()}</CardBody>
               <CardFooter>
-                <div style={{ marginTop: 25, float: "right" }}>
+                <div className="astra-card-footer">
                   {current < steps.length - 1 && (
                     <Button color="primary" onClick={() => next()}>
                       Suivant
@@ -598,42 +593,28 @@ const FrancaisPage = () => {
             </Card>
           </div>
         </div>
-        <div id="annonces" style={{ marginLeft: 200, marginRight: 200 }}>
-          <Card style={{ borderRadius: 180, marginBottom: 420 }}>
-            <h2
-              style={{
-                textAlign: "center",
-                paddingTop: 80,
-                color: "rgb(25, 118, 210)",
-              }}
-            >
+        <div id="annonces" className="astra-section-annonce">
+          <Card style={{ borderRadius: 200 }} className="astra-card-annonce">
+            <h2 className="astra-card-annonce-title">
               CONSEILLERS EN RELATIONS HUMAINES{" "}
             </h2>
             <br />
-            <span
-              style={{ textAlign: "center", fontSize: 22, fontWeight: "bold" }}
-            >
-              PROFIL :
-            </span>
+            <span className="astra-card-annonce-soustitle">PROFIL :</span>
             <br />
             <br />
-            <div style={{ textAlign: "center", paddingBottom: 40 }}>
-              <p style={{ fontSize: 18 }}>
+            <div className="astra-card-annonce-para">
+              <p>
                 *Maitrise parfaite de langue française à l’oral (bonne
                 élocution) comme à l’écrit.
               </p>
-              <p style={{ fontSize: 18 }}>
-                *Le sens de l’écoute et du conseil.
-              </p>
-              <p style={{ fontSize: 18 }}>*Très bonne culture générale.</p>
-              <p style={{ fontSize: 18 }}>
-                *Une vitesse de frappe sur le clavier serait un atout.
-              </p>
-              <p style={{ fontSize: 18 }}>*Disponibilité (jour et/ou nuit).</p>
+              <p>*Le sens de l’écoute et du conseil.</p>
+              <p>*Très bonne culture générale.</p>
+              <p>*Une vitesse de frappe sur le clavier serait un atout.</p>
+              <p>*Disponibilité (jour et/ou nuit).</p>
             </div>
           </Card>
         </div>
-        <div style={{ marginLeft: 100, marginRight: 100, paddingBottom: 30 }}>
+        <div className="astra-section-contact">
           <Card id="contact" style={{ marginTop: 100 }}>
             <h2
               style={{

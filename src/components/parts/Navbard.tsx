@@ -5,10 +5,9 @@ function Navbard() {
   return (
     <Navbar fixed="top" color="black">
       <NavbarBrand href="/fr" style={{ color: "white" }}>
-        RECRUTEMENT{" "}
-        <span style={{ fontSize: 25, fontWeight: "bold" }}>ASTRAGALE</span>
+        RECRUTEMENT <span className="nav-astra-page">ASTRAGALE</span>
       </NavbarBrand>
-      <Nav className="me-auto" style={{ marginLeft: 500, fontSize: 20 }}>
+      <Nav className="nav-astra-menu me-auto">
         <NavItem>
           <NavLink href="#formulaire" style={{ color: "white" }}>
             CANDIDATURE

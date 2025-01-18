@@ -15,6 +15,11 @@
   height: 100vh;
 }
 
+/* Home page desktop */
+.div-nav {
+  padding-top: 2px;
+}
+
 .nav-title-home {
   margin-left: 20px;
 }
@@ -26,8 +31,8 @@
 
 .home-para-title {
   font-size: 50px;
-  padding-top: 80px;
-  padding-left: 740px;
+  padding-top: 70px;
+  padding-left: 710px;
 }
 
 .home-para {
@@ -61,7 +66,96 @@
   font-weight: lighter;
 }
 
+/* Astragale fr page desktop */
+.nav-astra-page {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.nav-astra-menu {
+  margin-left: 520px;
+  font-size: 20px;
+}
+
+.section-astra-para {
+  padding-top: 190px;
+  padding-bottom: 272px;
+}
+
+.astra-title-para {
+  font-size: 52px;
+  margin-left: 39%;
+}
+
+.astra-para {
+  width: 600px;
+  margin-left: 29%;
+  font-size: 30px;
+  text-align: center;
+}
+
+.astra-section-card {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.astra-card {
+  border: 0px;
+  margin-bottom: 190px;
+}
+
+.astra-card-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  padding-top: 65px;
+}
+
+.astra-card-steps {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.astra-card-footer {
+  margin-top: 20px;
+  float: right;
+}
+
+.astra-section-annonce {
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.astra-card-annonce {
+  margin-bottom: 400px;
+}
+
+.astra-card-annonce-title {
+  text-align: center;
+  padding-top: 80px;
+  color: rgb(25, 118, 210);
+}
+
+.astra-card-annonce-soustitle {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.astra-card-annonce-para {
+  text-align: center;
+  padding-bottom: 40px;
+  font-size: 18px;
+}
+
+.astra-section-contact {
+  margin-left: 100px;
+  margin-right: 100px;
+  padding-bottom: 15px;
+}
+
 @media screen and (max-width: 430px) {
+  /* Home page */
   .home-page {
     background-image: url("/public/images/background-image.jpg");
     background-size: auto;
@@ -117,6 +211,35 @@
     font-size: 18px;
     font-weight: lighter;
   }
+
+  /* Astragale fr page desktop */
+  .nav-astra-page {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .nav-astra-menu {
+    margin-left: 10px;
+    font-size: 17px;
+  }
+
+  .section-astra-para {
+    padding-top: 300px;
+    padding-bottom: 350px;
+  }
+
+  .astra-title-para {
+    font-size: 30px;
+    margin-left: 130px;
+    margin-bottom: 45px;
+  }
+
+  .astra-para {
+    width: 400px;
+    margin-left: 20px;
+    font-size: 25px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -171,8 +294,37 @@
   .home-footer {
     position: fixed;
     bottom: 5px;
-    left: 1px;
+    left: 3px;
     font-size: 15px;
     font-weight: lighter;
+  }
+
+  /* Astragale fr page desktop */
+  .nav-astra-page {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .nav-astra-menu {
+    margin-left: 0px;
+    font-size: 14px;
+  }
+
+  .section-astra-para {
+    padding-top: 200px;
+    padding-bottom: 300px;
+  }
+
+  .astra-title-para {
+    font-size: 30px;
+    margin-left: 100px;
+    margin-bottom: 40px;
+  }
+
+  .astra-para {
+    width: 340px;
+    margin-left: 10px;
+    font-size: 25px;
+    text-align: center;
   }
 }

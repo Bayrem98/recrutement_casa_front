@@ -213,7 +213,7 @@ const FrancaisPage = () => {
 
   const handleSubmit = () => {
     axios.post(`${process.env.REACT_APP_API_URL}/users`);
-    alert("Email envoyé avec succès");
+    alert("Votre Candidature a été reçue, Voir ta boite de réception. Merci");
   };
 
   const FirstContent = (

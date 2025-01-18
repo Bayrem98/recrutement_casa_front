@@ -184,7 +184,7 @@ const FrancaisPage = () => {
     };
     addUser(newUser, () => {
       handleSubmit();
-      window.location.replace("/");
+      window.location.reload();
       reset();
     });
   };

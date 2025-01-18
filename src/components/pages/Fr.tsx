@@ -215,8 +215,8 @@ const FrancaisPage = () => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/users`)
       .then(() => {
-        console.log("Email envoyé avec succés");
         alert("Votre Candidature a été reçue, Voir ta boite mail. Merci");
+        console.log("Email envoyé avec succés");
       })
       .catch((error) => {
         console.error("Erreur lors de l'envoi de l'email:", error.message);

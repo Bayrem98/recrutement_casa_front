@@ -212,8 +212,15 @@ const FrancaisPage = () => {
   };
 
   const handleSubmit = () => {
-    axios.post(`${process.env.REACT_APP_API_URL}/users`);
-    alert("Votre Candidature a été reçue, Voir ta boite mail. Merci");
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/users`)
+      .then(() => {
+        console.log("Email envoyé avec succés");
+        alert("Votre Candidature a été reçue, Voir ta boite mail. Merci");
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'envoi de l'email:", error.message);
+      });
   };
 
   const FirstContent = (

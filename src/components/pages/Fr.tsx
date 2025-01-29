@@ -213,7 +213,7 @@ const FrancaisPage = () => {
 
   const handleSubmit = () => {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/users`)
+      .post(`${process.env.REACT_APP_API_URL}/users/sendmail`)
       .then(() => {
         alert("Votre Candidature a été reçue, Voir ta boite mail. Merci");
         console.log("Email envoyé avec succés");

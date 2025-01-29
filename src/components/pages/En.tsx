@@ -25,6 +25,7 @@ import {
 } from "reactstrap";
 import { addUser } from "../../actions/Users/action";
 import Navbard2 from "../parts/Navbard2";
+import axios from "axios";
 
 const fields = [
   { key: "Célibataire", name: "Single" },
@@ -182,6 +183,7 @@ const AnglaisPage = () => {
       status: { status: status, color: "someColor" },
     };
     addUser(newUser, () => {
+      handleSubmit();
       window.location.reload();
       reset();
     });
@@ -207,6 +209,18 @@ const AnglaisPage = () => {
     setQuestion3("");
     setCover_cv("");
     setStatus("");
+  };
+
+  const handleSubmit = () => {
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/users/sendmail`)
+      .then(() => {
+        alert("Votre Candidature a été reçue, Voir ta boite mail. Merci");
+        console.log("Email envoyé avec succés");
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'envoi de l'email:", error.message);
+      });
   };
 
   const FirstContent = (

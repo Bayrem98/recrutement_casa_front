@@ -184,7 +184,6 @@ const AnglaisPage = () => {
     };
     addUser(newUser, () => {
       handleSubmit();
-      window.location.reload();
       reset();
     });
   };
@@ -213,7 +212,7 @@ const AnglaisPage = () => {
 
   const handleSubmit = () => {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/users/sendmail`)
+      .post(`${process.env.REACT_APP_API_URL}/users`)
       .then(() => {
         alert("Votre Candidature a été reçue, Voir ta boite mail. Merci");
         console.log("Email envoyé avec succés");
@@ -221,6 +220,7 @@ const AnglaisPage = () => {
       .catch((error) => {
         console.error("Erreur lors de l'envoi de l'email:", error.message);
       });
+    window.location.reload();
   };
 
   const FirstContent = (

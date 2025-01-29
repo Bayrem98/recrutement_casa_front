@@ -309,10 +309,12 @@ const DashboardAdmin = () => {
               users
                 .filter(
                   (user) =>
-                    user.nom.toLowerCase().includes(filter.toLowerCase()) &&
-                    user.status.status
+                    (user.nom || "")
                       .toLowerCase()
-                      .includes(filter2.toLocaleLowerCase())
+                      .includes((filter || "").toLowerCase()) &&
+                    (user.status.status || "")
+                      .toLowerCase()
+                      .includes((filter2 || "").toLowerCase())
                 )
                 .map((user) => (
                   <tr key={user._id} style={{ fontSize: 12 }}>

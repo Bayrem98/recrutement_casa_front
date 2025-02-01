@@ -16,34 +16,37 @@ const Home = () => {
           </NavbarBrand>
         </div>
         <div>
-          <h1
+          {/** <h1
             className="home-para-title"
             style={{
               color: "white",
             }}
           >
             NOUS SOMMES
-          </h1>
+          </h1> */}
           <p
             className="home-para"
             style={{
               color: "white",
             }}
           >
-            Centre d’appel spécialisé dans la psychologie et les relations
-            humaines. Vous êtes dynamique avec l’envie de relever des défis,
-            Vous voulez postuler pour un poste de télécoseiller en langue
+            Rejoignez un centre d'appel unique, spécialisé en psychologie et
+            relations humaines. Si vous êtes dynamique, prêt à relever des défis
+            stimulants, et motivé par une carrière enrichissante, c'est le
+            moment parfait, nous recrutons activement ! Déposez votre
+            candidature et faites partie d'une équipe passionnée.
           </p>
         </div>
         <div className="home-div-button">
-          <Link to={"/fr"}>
-            <Button className="home-button-fr" color="warning" outline>
-              FRANÇAISE
-            </Button>
-          </Link>
+          <Button className="home-button-fr" color="warning" outline>
+            <Link to={"/fr"} style={{ textDecoration: "none", color: "white" }}>
+              FRANÇAIS
+            </Link>
+          </Button>
+
           <Link to={"/en"}>
             <Button className="home-button-en" color="info" outline>
-              ANGLAISE
+              ANGLAIS
             </Button>
           </Link>
         </div>

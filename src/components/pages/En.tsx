@@ -214,13 +214,13 @@ const AnglaisPage = () => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/users`)
       .then(() => {
+        window.location.reload();
         alert("Votre Candidature a été reçue, Voir ta boite mail. Merci");
         console.log("Email envoyé avec succés");
       })
       .catch((error) => {
         console.error("Erreur lors de l'envoi de l'email:", error.message);
       });
-    window.location.reload();
   };
 
   const FirstContent = (
@@ -546,28 +546,24 @@ const AnglaisPage = () => {
     <>
       <div className="fr-page">
         <Navbard2 />
-        <div style={{ paddingTop: 295, paddingBottom: 295 }}>
+        <div className="section-astra-para">
           <h1
+            className="astra-title-para2"
             style={{
               color: "white",
-              fontSize: 52,
-              marginLeft: "42%",
             }}
           >
             ULYSSE
           </h1>
           <p
+            className="astra-para"
             style={{
               color: "white",
-              width: 600,
-              marginLeft: "25%",
-              fontSize: 30,
-              textAlign: "center",
             }}
           >
-            Call center specialized in psychology and human relations. You are
-            dynamic with the desire to take on challenges, Submit your
-            application.
+            We are a subsidiary of an international French company, a leader in
+            its sector, and we are hiring HUMAN RELATIONS ADVISORS for the
+            English department.
           </p>
         </div>
         <div style={{ marginLeft: 50, marginRight: 50 }}>
@@ -638,14 +634,18 @@ const AnglaisPage = () => {
             <br />
             <div style={{ textAlign: "center", paddingBottom: 40 }}>
               <p style={{ fontSize: 18 }}>
-                *Perfect mastery of English in spoken (good speech) and written.
+                *Excellent command of the English language, both written and
+                spoken.
               </p>
               <p style={{ fontSize: 18 }}>
-                *The sense of listening and consulting.
+                *Intuitive and compassionate approach, with a genuine ability to
+                listen and provide support.
               </p>
-              <p style={{ fontSize: 18 }}>*Very good general knowledge.</p>
               <p style={{ fontSize: 18 }}>
-                *A typing speed on the keyboard is an advantage.
+                *Initiative and strong commitment to customer satisfaction.
+              </p>
+              <p style={{ fontSize: 18 }}>
+                *Warm, dynamic personality with a strong team spirit.
               </p>
               <p style={{ fontSize: 18 }}>
                 *Availability (day and / or night).
@@ -688,7 +688,7 @@ const AnglaisPage = () => {
                   }}
                 />
                 <span style={{ fontSize: 22, fontWeight: "bold" }}>
-                  Phone: 73 202 303
+                  Phone: 73 213 831
                 </span>
               </p>
               <p>

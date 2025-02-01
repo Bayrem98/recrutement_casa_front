@@ -214,13 +214,13 @@ const FrancaisPage = () => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/users`)
       .then(() => {
+        window.location.reload();
         alert("Votre Candidature a été reçue, Voir ta boite mail. Merci");
         console.log("Email envoyé avec succés");
       })
       .catch((error) => {
         console.error("Erreur lors de l'envoi de l'email:", error.message);
       });
-      window.location.reload();
   };
 
   const FirstContent = (
@@ -556,9 +556,9 @@ const FrancaisPage = () => {
               color: "white",
             }}
           >
-            Centre d’appel spécialisé dans la psychologie et les relations
-            humaines. Vous êtes dynamique avec l’envie de relever des défis,
-            Déposez votre candidature.
+            Nous sommes une filiale d'une entreprise française internationale,
+            leader dans son secteur, et nous recrutons des CONSEILLERS EN
+            RELATIONS HUMAINES pour le département Français.
           </p>
         </div>
         <div className="astra-section-card">
@@ -610,12 +610,20 @@ const FrancaisPage = () => {
             <br />
             <div className="astra-card-annonce-para">
               <p>
-                *Maitrise parfaite de langue française à l’oral (bonne
-                élocution) comme à l’écrit.
+                *Excellente maîtrise de la langue française, à l’écrit comme à
+                l’oral.
               </p>
-              <p>*Le sens de l’écoute et du conseil.</p>
-              <p>*Très bonne culture générale.</p>
-              <p>*Une vitesse de frappe sur le clavier serait un atout.</p>
+              <p>
+                *Approche intuitive et bienveillante, avec une réelle capacité à
+                écouter et accompagner.
+              </p>
+              <p>
+                *Un esprit d’initiative et un fort engagement envers la
+                satisfaction client.
+              </p>
+              <p>
+                *Chaleureux, dynamique et ayant un esprit de travail en équipe.
+              </p>
               <p>*Disponibilité (jour et/ou nuit).</p>
             </div>
           </Card>
@@ -629,7 +637,7 @@ const FrancaisPage = () => {
                 color: "rgb(25, 118, 210)",
               }}
             >
-              NOUS CONTACT
+              Contactez-nous
             </h2>
             <div style={{ paddingLeft: 150 }}>
               <p>
@@ -655,7 +663,7 @@ const FrancaisPage = () => {
                   }}
                 />
                 <span style={{ fontSize: 22, fontWeight: "bold" }}>
-                  Téléphone: 73 202 303
+                  Téléphone: 73 213 831
                 </span>
               </p>
               <p>

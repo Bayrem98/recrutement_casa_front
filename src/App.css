@@ -1,5 +1,5 @@
 .home-page {
-  background-image: url("/public/images/background-image.jpg");
+  background-image: url("/public/images/background-2.jpg");
   background-size: cover;
   height: 100vh;
 }
@@ -31,25 +31,27 @@
 
 .home-para-title {
   font-size: 50px;
-  padding-top: 70px;
-  padding-left: 710px;
-}
-
-.home-para {
-  width: 600px;
-  margin-left: 580px;
-  font-size: 26px;
+  padding-top: 60px;
   text-align: center;
 }
 
+.home-para {
+  padding-top: 60px;
+  width: 600px;
+  margin-left: 410px;
+  font-size: 26px;
+  text-align: center;
+  font-weight: bold;
+}
+
 .home-div-button {
-  margin-top: 200px;
-  margin-left: 50px;
+  margin-top: 70px;
+  margin-left: 420px;
 }
 
 .home-button-fr {
   width: 180px;
-  margin-right: 50px;
+  margin-right: 220px;
   height: 80px;
 }
 
@@ -61,7 +63,7 @@
 .home-footer {
   position: fixed;
   bottom: 0px;
-  left: 10px;
+  left: 480px;
   font-size: 20px;
   font-weight: lighter;
 }
@@ -85,6 +87,11 @@
 .astra-title-para {
   font-size: 52px;
   margin-left: 39%;
+}
+
+.astra-title-para2 {
+  font-size: 52px;
+  margin-left: 43%;
 }
 
 .astra-para {

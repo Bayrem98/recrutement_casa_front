@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Alert, Checkbox, Input } from "antd";
-import { Button, Card, CardHeader, Form, FormGroup } from "reactstrap";
+import { Button, Form, FormGroup, Col, Container, Row } from "reactstrap";
 
 const Login = () => {
   const [username, setUsername] = useState<string>("");
@@ -64,79 +64,86 @@ const Login = () => {
 
   return (
     <>
-      <div className="login-page">
-        <p
-          style={{
-            color: "white",
-            fontSize: 45,
-            paddingTop: 80,
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-        >
-          ADMIN
-          <br />
-          <span
-            style={{
-              color: "white",
-              fontSize: 30,
-              fontWeight: "lighter",
-            }}
+      <Container fluid>
+        <Row>
+          <Col xs={12} md={6} className="screen bg-dark " />
+          <Col
+            xs={12}
+            md={6}
+            className="login text-center p-5 d-flex flex-column justify-content-center"
           >
-            ASTRAGALE & ULYSSE
-          </span>
-        </p>
-        <Card
-          style={{ width: 400, position: "absolute", top: 260, left: "36%" }}
-        >
-          <CardHeader style={{ textAlign: "center" }}>
-            <p style={{ fontSize: 20 }}>CONNECTER VOUS</p>
-            {errorMessage && (
-              <Alert
-                message=""
-                description={errorMessage}
-                type="error"
-                showIcon
-              />
-            )}
-          </CardHeader>
-          <br />
-          <Form
-            onSubmit={(event) => login(event)}
-            style={{ minWidth: 400, paddingRight: 20, paddingLeft: 10 }}
-          >
-            <FormGroup className="d-flex justify-content">
-              <UserOutlined style={{ fontSize: 20, marginRight: 10 }} />
-              <Input
-                placeholder="Nom D'utilisateur"
-                type="text"
-                value={username}
-                onChange={handleUsernameChange}
-              />
-            </FormGroup>
+            <p
+              style={{
+                color: "black",
+                fontSize: 45,
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              ADMIN
+              <br />
+              <span
+                style={{
+                  color: "black",
+                  fontSize: 30,
+                  fontWeight: "lighter",
+                }}
+              >
+                ASTRAGALE & ULYSSE
+              </span>
+            </p>
 
-            <FormGroup className="d-flex justify-content">
-              <LockOutlined style={{ fontSize: 20, marginRight: 10 }} />
-              <Input.Password
-                placeholder="Mot de Passe"
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-            </FormGroup>
+            <Form onSubmit={(event) => login(event)}>
+              {errorMessage && (
+                <Alert
+                  message=""
+                  description={errorMessage}
+                  type="error"
+                  showIcon
+                />
+              )}
+              <br />
+              <FormGroup className="d-flex justify-content">
+                <UserOutlined style={{ fontSize: 20, marginRight: 10 }} />
+                <Input
+                  placeholder="Nom D'utilisateur"
+                  type="text"
+                  value={username}
+                  onChange={handleUsernameChange}
+                />
+              </FormGroup>
 
-            <FormGroup>
-              <Checkbox> Se souvenir de moi</Checkbox>
-            </FormGroup>
+              <FormGroup className="d-flex justify-content">
+                <LockOutlined style={{ fontSize: 20, marginRight: 10 }} />
+                <Input.Password
+                  placeholder="Mot de Passe"
+                  type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+              </FormGroup>
 
-            <FormGroup>
-              <Button color="primary" type="submit" block>
-                Connexion
-              </Button>
-            </FormGroup>
-          </Form>
-        </Card>
-      </div>
+              <Row>
+                <Col className="d-flex">
+                  <FormGroup>
+                    <Checkbox> Se souvenir de moi</Checkbox>
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <span></span>
+                </Col>
+              </Row>
+
+              <FormGroup>
+                <Button color="primary" type="submit" block>
+                  Connexion
+                </Button>
+              </FormGroup>
+            </Form>
+            <footer className="text-center"></footer>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

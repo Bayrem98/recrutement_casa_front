@@ -15,6 +15,16 @@
   height: 100vh;
 }
 
+.screen,
+.login {
+  height: 100vh;
+}
+.screen {
+  background: url("../public/images/background-3.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 /* Home page desktop */
 .div-nav {
   padding-top: 2px;

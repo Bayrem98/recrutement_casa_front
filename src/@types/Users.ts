@@ -19,4 +19,5 @@ export default interface Users {
   question3: string;
   cover_cv: string;
   status: { status: string; color: string };
+  dateRDV: string;
 }

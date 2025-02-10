@@ -136,6 +136,7 @@ const AnglaisPage = () => {
   const [question3, setQuestion3] = useState<string>("");
   const [cover_cv, setCover_cv] = useState<any>();
   const [status, setStatus] = useState<string>("");
+  const [dateRDV, setDateRDV] = useState<string>("");
 
   const changeCoverHandler = (event: any) => {
     const selectedCover = event.target.files[0];
@@ -181,6 +182,7 @@ const AnglaisPage = () => {
       question3,
       cover_cv,
       status: { status: status, color: "someColor" },
+      dateRDV,
     };
     addUser(newUser, () => {
       handleSubmit();
@@ -208,6 +210,7 @@ const AnglaisPage = () => {
     setQuestion3("");
     setCover_cv("");
     setStatus("");
+    setDateRDV("");
   };
 
   const handleSubmit = () => {

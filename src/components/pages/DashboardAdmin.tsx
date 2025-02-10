@@ -40,6 +40,10 @@ const fields = [
     key: "Réfuser",
     name: "Réfuser",
   },
+  {
+    key: "RDV",
+    name: "RDV",
+  },
 ];
 
 const DashboardAdmin = () => {
@@ -54,6 +58,9 @@ const DashboardAdmin = () => {
   const [filter, setFilter] = useState<string>("");
   const [filter2, setFilter2] = useState<string>("");
   const [formateur, setFormateur] = useState<Admin | null>(null);
+  const [userRDV, setUserRDV] = useState<{
+    [userId: string]: { dateRDV: string };
+  }>({});
 
   const handleDateChange = (event: any) => {
     const newDate = event.target.value;
@@ -136,6 +143,8 @@ const DashboardAdmin = () => {
         return "red";
       case "en cours":
         return "yellow";
+      case "RDV":
+        return "blue";
       default:
         return "";
     }
@@ -145,23 +154,50 @@ const DashboardAdmin = () => {
     return (
       !!user &&
       !!user.status &&
-      user.status.status === "En cours" &&
-      user.status.color === "yellow"
+      user.status.status === "injoignable" &&
+      user.status.color === "black"
     );
   };
 
-  const handleSubmitRDV = () => {
-    if (!oneUser || !dateRDV) {
+  useEffect(() => {
+    // Récupérer tous les utilisateurs
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/users`)
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "Erreur lors de la récupération des utilisateurs :",
+          error
+        );
+      });
+
+    // Récupérer l'utilisateur spécifique en fonction de userId de l'URL
+    if (userId) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/users/${userId}`)
+        .then((response) => {
+          setOneUser(response.data);
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de la récupération de l'utilisateur :",
+            error
+          );
+        });
+    }
+  }, [userId]);
+
+  const handleSubmitRDV = (userId: string, dateRDVfixe: string) => {
+    if (!userId || !dateRDVfixe) {
       alert("Veuillez sélectionner un utilisateur et une date de RDV.");
       return;
     }
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/appointments`, {
-        userId: oneUser._id,
-        nom: oneUser.nom,
-        prenom: oneUser.prenom,
-        dateRDV: dateRDV,
+      .put(`${process.env.REACT_APP_API_URL}/users/appointments/${userId}`, {
+        dateRDV: dateRDVfixe,
       })
       .then((response) => {
         alert("RDV fixé avec succès !");
@@ -582,9 +618,7 @@ const DashboardAdmin = () => {
                               onChange={handleDateChange}
                             />
                             <br />
-                            {dateRDV && (
-                              <p>RDV fixé par ............. le {dateRDV}</p>
-                            )}
+
                             <Button
                               color="info"
                               style={{ color: "white" }}
@@ -621,36 +655,16 @@ const DashboardAdmin = () => {
                             <Button
                               color="info"
                               style={{ color: "white" }}
-                              onClick={handleSubmitRDV}
+                              onClick={() => {
+                                if (oneUser && oneUser._id) {
+                                  handleSubmitRDV(oneUser._id, dateRDV);
+                                }
+                              }}
                             >
                               Valider le RDV
                             </Button>
+                            {dateRDV && <p>RDV fixé le {dateRDV}</p>}
                           </div>
-                        </FormGroup>
-                        <FormGroup>
-                          <Label
-                            style={{
-                              fontSize: 18,
-                              color: "black",
-                              marginRight: 8,
-                            }}
-                          >
-                            Réfuser
-                          </Label>
-                          <Input
-                            type="radio"
-                            style={{ fontSize: 22, cursor: "pointer" }}
-                            onClick={() => {
-                              oneUser &&
-                                oneUser._id &&
-                                handleChangeStatus(
-                                  oneUser._id,
-                                  "Réfuser",
-                                  "red"
-                                );
-                              setIsOpened(false);
-                            }}
-                          ></Input>
                         </FormGroup>
                       </div>
                       <div></div>

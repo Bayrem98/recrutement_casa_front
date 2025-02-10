@@ -16,14 +16,6 @@ const Home = () => {
           </NavbarBrand>
         </div>
         <div>
-          {/** <h1
-            className="home-para-title"
-            style={{
-              color: "white",
-            }}
-          >
-            NOUS SOMMES
-          </h1> */}
           <p
             className="home-para"
             style={{
@@ -38,11 +30,11 @@ const Home = () => {
           </p>
         </div>
         <div className="home-div-button">
-          <Button className="home-button-fr" color="warning" outline>
-            <Link to={"/fr"} style={{ textDecoration: "none", color: "white" }}>
+          <Link to={"/fr"} style={{ textDecoration: "none", color: "white" }}>
+            <Button className="home-button-fr" color="warning" outline>
               FRANÇAIS
-            </Link>
-          </Button>
+            </Button>
+          </Link>
 
           <Link to={"/en"}>
             <Button className="home-button-en" color="info" outline>

@@ -136,6 +136,7 @@ const FrancaisPage = () => {
   const [question3, setQuestion3] = useState<string>("");
   const [cover_cv, setCover_cv] = useState<any>();
   const [status, setStatus] = useState<string>("");
+  const [dateRDV, setDateRDV] = useState<string>("");
 
   const changeCoverHandler = (event: any) => {
     const selectedCover = event.target.files[0];
@@ -181,6 +182,7 @@ const FrancaisPage = () => {
       question3,
       cover_cv,
       status: { status: status, color: "someColor" },
+      dateRDV,
     };
     addUser(newUser, () => {
       handleSubmit();
@@ -208,6 +210,7 @@ const FrancaisPage = () => {
     setQuestion3("");
     setCover_cv("");
     setStatus("");
+    setDateRDV("");
   };
 
   const handleSubmit = () => {
@@ -629,53 +632,49 @@ const FrancaisPage = () => {
           </Card>
         </div>
         <div className="astra-section-contact">
-          <Card id="contact" style={{ marginTop: 100 }}>
+          <Card className="astra-card-contact" id="contact">
             <h2
+              className="astra-card-contact-title"
               style={{
-                textAlign: "center",
-                paddingTop: 10,
                 color: "rgb(25, 118, 210)",
               }}
             >
               Contactez-nous
             </h2>
-            <div style={{ paddingLeft: 150 }}>
+            <div className="astra-card-contact-div">
               <p>
                 <FontAwesomeIcon
+                  className="astra-card-contact-icon1"
                   icon={faMapLocationDot}
                   style={{
-                    fontSize: 50,
                     color: "rgb(25, 118, 210)",
-                    marginRight: 20,
                   }}
                 />
-                <span style={{ fontSize: 22, fontWeight: "bold" }}>
+                <span className="astra-card-contact-text">
                   Adresse: Rue Rabat complexe Zaoui 4000 Sousse
                 </span>
               </p>
               <p>
                 <FontAwesomeIcon
+                  className="astra-card-contact-icon2_3"
                   icon={faPhoneVolume}
                   style={{
-                    fontSize: 50,
                     color: "rgb(25, 118, 210)",
-                    marginRight: 25,
                   }}
                 />
-                <span style={{ fontSize: 22, fontWeight: "bold" }}>
+                <span className="astra-card-contact-text">
                   Téléphone: 73 213 831
                 </span>
               </p>
               <p>
                 <FontAwesomeIcon
+                  className="astra-card-contact-icon2_3"
                   icon={faInbox}
                   style={{
-                    fontSize: 50,
                     color: "rgb(25, 118, 210)",
-                    marginRight: 25,
                   }}
                 />
-                <span style={{ fontSize: 22, fontWeight: "bold" }}>
+                <span className="astra-card-contact-text">
                   Email: recrutement@astragale-tunisie.com
                 </span>
               </p>
@@ -683,27 +682,11 @@ const FrancaisPage = () => {
           </Card>
         </div>
         <iframe
+          className="astra-map"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d284.2092886192863!2d10.629663082749477!3d35.83441499867604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x130275dc196c8893%3A0x307441513a219032!2sUlysse%20Call%20Center!5e0!3m2!1sfr!2stn!4v1713357874110!5m2!1sfr!2stn"
-          style={{
-            border: 0,
-            height: 300,
-            width: "95%",
-            marginLeft: 30,
-            marginBottom: 50,
-            borderRadius: 20,
-          }}
           loading="lazy"
         ></iframe>
-        <footer
-          style={{
-            position: "fixed",
-            bottom: 0,
-            color: "white",
-            left: "32%",
-            fontSize: 20,
-            fontWeight: "lighter",
-          }}
-        >
+        <footer className="home-footer">
           <p>Copyright © recrutement.astragale-tunisie.com 2024</p>
         </footer>
       </div>

@@ -72,6 +72,7 @@ const UserAdd = () => {
   const [question3, setQuestion3] = useState<string>("");
   const [cover_cv, setCover_cv] = useState<any>();
   const [newStatus, setNewStatus] = useState<string>("");
+  const [dateRDV, setDateRDV] = useState<string>("");
 
   const changeCoverHandler = (event: any) => {
     const selectedCover = event.target.files[0];
@@ -116,6 +117,7 @@ const UserAdd = () => {
       question3,
       cover_cv,
       status: { status: newStatus, color: "someColor" },
+      dateRDV,
     };
     addUser(newUser, () => {
       setIsOpened(false);
@@ -143,6 +145,7 @@ const UserAdd = () => {
     setQuestion3("");
     setCover_cv("");
     setNewStatus("");
+    setDateRDV("");
   };
 
   return (

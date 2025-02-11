@@ -159,36 +159,7 @@ const DashboardAdmin = () => {
     );
   };
 
-  useEffect(() => {
-    // Récupérer tous les utilisateurs
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/users`)
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((error) => {
-        console.error(
-          "Erreur lors de la récupération des utilisateurs :",
-          error
-        );
-      });
-
-    // Récupérer l'utilisateur spécifique en fonction de userId de l'URL
-    if (userId) {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/users/${userId}`)
-        .then((response) => {
-          setOneUser(response.data);
-        })
-        .catch((error) => {
-          console.error(
-            "Erreur lors de la récupération de l'utilisateur :",
-            error
-          );
-        });
-    }
-  }, [userId]);
-
+  
   const handleSubmitRDV = (userId: string, dateRDVfixe: string) => {
     if (!userId || !dateRDVfixe) {
       alert("Veuillez sélectionner un utilisateur et une date de RDV.");

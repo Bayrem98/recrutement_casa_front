@@ -228,7 +228,35 @@
   border-radius: 20px;
 }
 
+.login-title-form {
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.login-span-form {
+  font-size: 30px;
+  font-weight: lighter;
+}
+
 @media screen and (max-width: 430px) {
+  /* Login page */
+  .screen,
+  .login {
+    height: 45vh;
+  }
+
+  .login-title-form {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .login-span-form {
+    font-size: 30px;
+    font-weight: lighter;
+  }
+
   /* Home page */
   .home-page {
     background-image: url("/public/images/background-2.jpg");
@@ -328,6 +356,25 @@
 }
 
 @media screen and (max-width: 360px) {
+  /* Login Page */
+  .screen,
+  .login {
+    height: 43vh;
+  }
+
+  .login-title-form {
+    padding-top: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .login-span-form {
+    font-size: 22px;
+    font-weight: lighter;
+  }
+
+  /* Home Page */
   .home-page {
     background-image: url("/public/images/background-2.jpg");
     background-size: auto;
@@ -438,7 +485,7 @@
   }
 
   .home-para {
-    padding-top: 120px; /* Augmenter l'espacement en haut */
+    padding-top: 200px; /* Augmenter l'espacement en haut */
     font-size: 32px; /* Augmenter la taille de la police */
     max-width: 60%; /* Réduire la largeur maximale */
   }
@@ -492,5 +539,14 @@
 
   .astra-card-annonce-para {
     font-size: 22px; /* Augmenter la taille de la police */
+  }
+
+  .astra-map {
+    border: 0;
+    height: 300px;
+    width: 95%;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    border-radius: 20px;
   }
 }

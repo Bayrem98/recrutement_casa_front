@@ -232,16 +232,16 @@ const DashboardAdmin = () => {
                 <div className="d-flex justify-content">
                   <p>Légendaire Couleur :</p>
                   <Card
-                    color="white"
+                    color="info"
                     style={{
                       marginLeft: 10,
-                      color: "black",
+                      color: "white",
                       width: 100,
                       height: 40,
                       textAlign: "center",
                     }}
                   >
-                    Pas encore
+                    RDV
                   </Card>
                   <Card
                     color="success"
@@ -280,24 +280,21 @@ const DashboardAdmin = () => {
                     Réfuser
                   </Card>
                 </div>
+                <br />
                 <div
-                  className="d-flex justify-content"
-                  style={{ position: "absolute", left: 600, top: 60 }}
+                  className="d-flex justify-content-between"
+                  style={{ float: "right" }}
                 >
-                  <FormGroup style={{ marginRight: 30, marginLeft: 100 }}>
-                    <Input type="date" style={{ width: 150 }} />
-                  </FormGroup>
-                  <FormGroup>
+                  <FormGroup style={{paddingLeft: 100}}>
                     <Input
-                      placeholder="Filtre par nom"
+                      placeholder="Chercher..."
                       value={filter}
                       onChange={(e) => setFilter(e.target.value)}
                       type="text"
                       style={{ width: 150 }}
                     />
-                    <Label style={{ color: "white", paddingTop: 10 }}>
-                      Filtre par status
-                    </Label>
+                  </FormGroup>
+                  <FormGroup>
                     <Input
                       value={filter2}
                       onChange={(e) => setFilter2(e.target.value)}

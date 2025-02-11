@@ -73,20 +73,17 @@ const Login = () => {
             className="login text-center p-5 d-flex flex-column justify-content-center"
           >
             <p
+              className="login-title-form"
               style={{
                 color: "black",
-                fontSize: 45,
-                fontWeight: "bold",
-                textAlign: "center",
               }}
             >
               ADMIN
               <br />
               <span
+                className="login-span-form"
                 style={{
                   color: "black",
-                  fontSize: 30,
-                  fontWeight: "lighter",
                 }}
               >
                 ASTRAGALE & ULYSSE

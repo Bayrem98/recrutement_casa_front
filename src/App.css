@@ -239,6 +239,35 @@
   font-weight: lighter;
 }
 
+/* Dashboard page admin */
+.sidebar-div {
+  width: 199px;
+}
+
+.sidebar-menu-button {
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-top: 70px;
+  margin-right: 5px;
+}
+
+.sidebar-menu-logo {
+  font-size: 20px;
+}
+
+.sidebar-menu-title {
+  margin-top: 73px;
+}
+
+.sidebar-menu-card {
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.sidebar-menu-icon {
+  font-size: 17px;
+}
+
 @media screen and (max-width: 430px) {
   /* Login page */
   .screen,
@@ -334,6 +363,10 @@
     padding-top: 30px; /* Réduire l'espacement en haut */
   }
 
+  .astra-card-steps {
+    padding: 0 0 0 10px; /* Espacement interne */
+  }
+
   .astra-section-annonce {
     margin: 0 20px; /* Réduire la marge latérale */
   }
@@ -352,6 +385,40 @@
 
   .astra-card-annonce-para {
     font-size: 16px; /* Réduire la taille de la police */
+  }
+
+  .astra-section-contact {
+    margin: 0 auto; /* Centrer la section */
+    max-width: 1200px; /* Limiter la largeur */
+    padding: 0 10px 15px; /* Espacement interne */
+  }
+
+  .astra-card-contact {
+    margin-top: 100px;
+  }
+
+  .astra-card-contact-title {
+    padding-top: 10px;
+    text-align: center;
+  }
+
+  .astra-card-contact-div {
+    padding-left: 5px;
+  }
+
+  .astra-card-contact-icon1 {
+    font-size: 35px;
+    margin-right: 10px;
+  }
+
+  .astra-card-contact-icon2_3 {
+    font-size: 37px;
+    margin-right: 10px;
+  }
+
+  .astra-card-contact-text {
+    font-size: 14px;
+    font-weight: bold;
   }
 }
 

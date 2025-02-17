@@ -39,34 +39,36 @@ const items: MenuItem[] = [
       Candidateurs
     </Link>,
     "1",
-    <TeamOutlined style={{ fontSize: 17 }} />
+    <TeamOutlined style={{ fontSize: 19 }} />
   ),
-  getItem(
-    <Link to={"/agendardv"} style={{ textDecoration: "none" }}>
-      Agenda RDV
-    </Link>,
-    "2",
-    <CalendarOutlined style={{ fontSize: 17 }} />
-  ),
+  // getItem(
+  //   <Link to={"/agendardv"} style={{ textDecoration: "none" }}>
+  //     Agenda RDV
+  //   </Link>,
+  //   "2",
+  //  <CalendarOutlined style={{ fontSize: 17 }} />
+  // ),
   getItem(
     <Link to={"/candidataccepte/Accepter"} style={{ textDecoration: "none" }}>
       Candidat Accepter
     </Link>,
     "3",
-    <CheckCircleOutlined style={{ fontSize: 17 }} />
+    <CheckCircleOutlined style={{ fontSize: 19 }} />
   ),
-  getItem(<UserAdd />, "4", <UserAddOutlined style={{ fontSize: 17 }} />),
+  getItem(<UserAdd />, "4", <UserAddOutlined style={{ fontSize: 19 }} />),
 
-  getItem("Parametres", "sub1", <SettingOutlined style={{ fontSize: 17 }} />, [
+  getItem("Parametres", "sub1", <SettingOutlined style={{ fontSize: 19 }} />, [
     getItem(
       <Link to={"/profil"} style={{ textDecoration: "none" }}>
         Profil
       </Link>,
       "5",
-      <ProfileOutlined style={{ fontSize: 18 }} />
+      <ProfileOutlined style={{ fontSize: 20 }} />
     ),
     getItem(
-      <div onClick={() => logout()}>Déconnexion</div>,
+      <div onClick={() => logout()} style={{ fontSize: 15 }}>
+        Déconnexion
+      </div>,
       "6",
       <LogoutOutlined style={{ fontSize: 18 }} />
     ),
@@ -82,27 +84,21 @@ const Sidebar = () => {
 
   return (
     <>
-      <div style={{ width: 190 }}>
+      <div className="sidebar-div">
         <div className="d-flex justify-content">
-          <Button
-            onClick={toggleCollapsed}
-            style={{
-              marginBottom: 5,
-              marginLeft: 5,
-              marginTop: 70,
-              marginRight: 5,
-            }}
-          >
+          <Button className="sidebar-menu-button" onClick={toggleCollapsed}>
             {collapsed ? (
-              <MenuUnfoldOutlined style={{ fontSize: 20 }} />
+              <MenuUnfoldOutlined className="sidebar-menu-logo" />
             ) : (
-              <MenuFoldOutlined style={{ fontSize: 20 }} />
+              <MenuFoldOutlined className="sidebar-menu-logo" />
             )}
           </Button>
-          <h5 style={{ color: "white", marginTop: 73 }}>MENU</h5>
+          <h5 className="sidebar-menu-title" style={{ color: "white" }}>
+            MENU
+          </h5>
         </div>
         <Menu
-          style={{ borderRadius: 10, marginLeft: 5 }}
+          className="sidebar-menu-card "
           mode="inline"
           theme="light"
           inlineCollapsed={collapsed}

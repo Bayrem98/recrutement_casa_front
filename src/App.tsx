@@ -32,7 +32,7 @@ function App() {
               path="/candidataccepte/:status"
               element={<CandidatAccepte />}
             />
-            <Route path="/agendardv" element={<AgendaRdv />} />
+            {/** <Route path="/agendardv" element={<AgendaRdv />} /> */}
             <Route path="/profil" element={<Profil />} />
           </Routes>
         </>

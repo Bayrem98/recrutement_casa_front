@@ -569,28 +569,19 @@ const AnglaisPage = () => {
             English department.
           </p>
         </div>
-        <div style={{ marginLeft: 50, marginRight: 50 }}>
+        <div className="astra-section-card">
           <div id="formulaire">
-            <Card style={{ border: 0, marginBottom: 190 }}>
-              <p
-                style={{
-                  textAlign: "center",
-                  fontSize: 22,
-                  fontWeight: "bold",
-                  paddingTop: 65,
-                }}
-              >
-                SUBMIT YOUR APPLICATION
-              </p>
+            <Card className="astra-card">
+              <p className="astra-card-title">SUBMIT YOUR APPLICATION</p>
               <br />
               <Steps
+                className="astra-card-steps"
                 current={current}
                 items={items}
-                style={{ paddingLeft: 20, paddingRight: 20 }}
               />
               <CardBody>{renderContent()}</CardBody>
               <CardFooter>
-                <div style={{ marginTop: 25, float: "right" }}>
+                <div className="astra-card-footer">
                   {current < steps.length - 1 && (
                     <Button color="primary" onClick={() => next()}>
                       Next
@@ -616,94 +607,74 @@ const AnglaisPage = () => {
             </Card>
           </div>
         </div>
-        <div id="annonces" style={{ marginLeft: 200, marginRight: 200 }}>
-          <Card style={{ borderRadius: 180, marginBottom: 420 }}>
-            <h2
-              style={{
-                textAlign: "center",
-                paddingTop: 80,
-                color: "rgb(25, 118, 210)",
-              }}
-            >
+        <div id="annonces" className="astra-section-annonce">
+          <Card style={{ borderRadius: 200 }} className="astra-card-annonce">
+            <h2 className="astra-card-annonce-title">
               HUMAN RELATIONS CONSULTANTS
             </h2>
             <br />
-            <span
-              style={{ textAlign: "center", fontSize: 22, fontWeight: "bold" }}
-            >
-              PROFILE :
-            </span>
+            <span className="astra-card-annonce-soustitle">PROFILE :</span>
             <br />
             <br />
-            <div style={{ textAlign: "center", paddingBottom: 40 }}>
-              <p style={{ fontSize: 18 }}>
+            <div className="astra-card-annonce-para">
+              <p>
                 *Excellent command of the English language, both written and
                 spoken.
               </p>
-              <p style={{ fontSize: 18 }}>
+              <p>
                 *Intuitive and compassionate approach, with a genuine ability to
                 listen and provide support.
               </p>
-              <p style={{ fontSize: 18 }}>
-                *Initiative and strong commitment to customer satisfaction.
-              </p>
-              <p style={{ fontSize: 18 }}>
-                *Warm, dynamic personality with a strong team spirit.
-              </p>
-              <p style={{ fontSize: 18 }}>
-                *Availability (day and / or night).
-              </p>
+              <p>*Initiative and strong commitment to customer satisfaction.</p>
+              <p>*Warm, dynamic personality with a strong team spirit.</p>
+              <p>*Availability (day and / or night).</p>
             </div>
           </Card>
         </div>
-        <div style={{ marginLeft: 100, marginRight: 100, paddingBottom: 30 }}>
-          <Card id="contact" style={{ marginTop: 100 }}>
+        <div className="astra-section-contact">
+          <Card className="astra-card-contact" id="contact">
             <h2
+              className="astra-card-contact-title"
               style={{
-                textAlign: "center",
-                paddingTop: 10,
                 color: "rgb(25, 118, 210)",
               }}
             >
               CONTACT US
             </h2>
-            <div style={{ paddingLeft: 150 }}>
+            <div className="astra-card-contact-div">
               <p>
                 <FontAwesomeIcon
+                  className="astra-card-contact-icon1"
                   icon={faMapLocationDot}
                   style={{
-                    fontSize: 50,
                     color: "rgb(25, 118, 210)",
-                    marginRight: 20,
                   }}
                 />
-                <span style={{ fontSize: 22, fontWeight: "bold" }}>
+                <span className="astra-card-contact-text">
                   Address: Rue Rabat complexe Zaoui 4000 Sousse
                 </span>
               </p>
               <p>
-                <FontAwesomeIcon
+              <FontAwesomeIcon
+                  className="astra-card-contact-icon2_3"
                   icon={faPhoneVolume}
                   style={{
-                    fontSize: 50,
                     color: "rgb(25, 118, 210)",
-                    marginRight: 25,
                   }}
                 />
-                <span style={{ fontSize: 22, fontWeight: "bold" }}>
+                <span className="astra-card-contact-text">
                   Phone: 73 213 831
                 </span>
               </p>
               <p>
-                <FontAwesomeIcon
+              <FontAwesomeIcon
+                  className="astra-card-contact-icon2_3"
                   icon={faInbox}
                   style={{
-                    fontSize: 50,
                     color: "rgb(25, 118, 210)",
-                    marginRight: 25,
                   }}
                 />
-                <span style={{ fontSize: 22, fontWeight: "bold" }}>
+                <span className="astra-card-contact-text">
                   E-mail: recrutement@astragale-tunisie.com
                 </span>
               </p>
@@ -711,27 +682,11 @@ const AnglaisPage = () => {
           </Card>
         </div>
         <iframe
+          className="astra-map"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d284.2092886192863!2d10.629663082749477!3d35.83441499867604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x130275dc196c8893%3A0x307441513a219032!2sUlysse%20Call%20Center!5e0!3m2!1sfr!2stn!4v1713357874110!5m2!1sfr!2stn"
-          style={{
-            border: 0,
-            height: 300,
-            width: "95%",
-            marginLeft: 30,
-            marginBottom: 50,
-            borderRadius: 20,
-          }}
           loading="lazy"
         ></iframe>
-        <footer
-          style={{
-            position: "fixed",
-            bottom: 0,
-            color: "white",
-            left: "32%",
-            fontSize: 20,
-            fontWeight: "lighter",
-          }}
-        >
+        <footer className="home-footer">
           <p>Copyright © recrutement.astragale-tunisie.com 2024</p>
         </footer>
       </div>

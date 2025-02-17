@@ -159,7 +159,6 @@ const DashboardAdmin = () => {
     );
   };
 
-  
   const handleSubmitRDV = (userId: string, dateRDVfixe: string) => {
     if (!userId || !dateRDVfixe) {
       alert("Veuillez sélectionner un utilisateur et une date de RDV.");
@@ -182,7 +181,7 @@ const DashboardAdmin = () => {
 
   return (
     <>
-      <div className="fr-page" style={{ paddingBottom: 400 }}>
+      <div className="fr-page" style={{ height: "100vh" }}>
         <Navbard3 />
         <div className="d-flex justify-content">
           <Sidebar />
@@ -193,6 +192,7 @@ const DashboardAdmin = () => {
               marginLeft: 10,
               marginRight: 10,
               marginBottom: 5,
+              width: "100%",
             }}
           >
             <CardHeader>
@@ -250,19 +250,13 @@ const DashboardAdmin = () => {
                   >
                     Réfuser
                   </Card>
-                </div>
-                <br />
-                <div
-                  className="d-flex justify-content-between"
-                  style={{ float: "right" }}
-                >
-                  <FormGroup style={{paddingLeft: 100}}>
+                  <FormGroup style={{ paddingLeft: 100 }}>
                     <Input
                       placeholder="Chercher..."
                       value={filter}
                       onChange={(e) => setFilter(e.target.value)}
                       type="text"
-                      style={{ width: 150 }}
+                      style={{ width: 180, marginRight: 40 }}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -270,7 +264,7 @@ const DashboardAdmin = () => {
                       value={filter2}
                       onChange={(e) => setFilter2(e.target.value)}
                       type="select"
-                      style={{ width: 150, cursor: "pointer" }}
+                      style={{ width: 180, cursor: "pointer" }}
                     >
                       <option value="">Tous status...</option>
                       {fields.map((f) => (

@@ -108,7 +108,7 @@ const DashboardAdmin = () => {
       ...prevState,
       [userId]: { status: newStatus, color: newColor },
     }));
-    window.location.reload();
+    
 
     // Stocker les données dans le stockage local du navigateur
     localStorage.setItem(
@@ -124,6 +124,7 @@ const DashboardAdmin = () => {
       .then((response) => {
         console.log("Le statut de l'utilisateur a été changé", response.data);
         setIsOpened(false);
+        window.location.reload();
       })
       .catch((error) => {
         console.error(
